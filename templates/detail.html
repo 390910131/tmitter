@@ -1,0 +1,15 @@
+    <div id="main">
+        <div class="list">
+            <ol>
+            <li>
+                <h5>消息：<span>{{ item.id }}</span></h5>
+                <p class="message"><a href="/user/{{ item.user.username }}" class="username">{{ item.user.realname }}</a>  {{ item.message }}<p>
+                <p class="info">
+                    <span class="date">{{ item.addtime }}</span>
+                    <span class="category">通过{{ item.category.name }}</span>                    
+                </p>
+                
+            </li>
+            </ol>
+        </div>
+    </div>
