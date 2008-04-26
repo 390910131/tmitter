@@ -162,7 +162,7 @@ def detail(request,_id):
     _islogin = __is_login(request)
     
     # header
-    _header = __get_header('message %s' % _id)
+    _header = __get_header('message %s' % _id,request)
     
     _note = get_object_or_404(Note,id=_id)
     # body content
