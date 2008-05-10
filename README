@@ -8,7 +8,7 @@ Tmitter ÊÇÒ»¸öÄ£·Â twitter.com µÄÃÔÄã²©¿Í³ÌĞò£¬Ëü¿ÉÒÔÊÇ¸ü¼ÓÎ¢ĞÍµÄ£¬Ö÷ÒªÊÇ¸øÊÖ»ú¿
    1. Python 2.5.2
    2. Django 0.96.1
    3. MySQL 5.0
-   4. Komodo IDE 4.3
+   4. Komodo IDE 4.3 ±¾ÏîÄ¿ÓÃĞ© Komodo ´´½¨µÄÏîÄ¿£¬ÓÃËü¿ÉÒÔÖ±½Ó´ò¿ªÔ´´úÂëÄ¿Â¼ÀïÃæµÄ Tmitter.kpf
 
 ÏîÄ¿µØÖ·£º
    http://code.google.com/p/tmitter/

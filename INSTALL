@@ -1,0 +1,7 @@
+1.安装 Django
+2.安装 MySQL-python-1.2.2
+3.在为MySql 创建数据库 tmitter 或 修改 settings.py 内的 DATABASE_NAME 值为你想使用的数据库名，并在mysql里面创建此数据库。
+4.打开命令窗口，并进入tmitter源代码目录，执行 manage.py syncdb 命令，根据提示完成操作。这样 Django 为自动为我们创建相关的表。
+5.运行 manage.py runserver 将会开始运行web服务器，最后打开提示出来的地址，如：http://127.0.0.1:8000/
+
+
