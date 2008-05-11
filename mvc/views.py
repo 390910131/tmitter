@@ -101,10 +101,18 @@ footer = __get_footer()
 
 # home view
 def index(request):
-    return index_param(request,'')
+    return index_user(request,'')
 
 # user messages view
-def index_param(request,_username):
+def index_user(request,_username):
+    return index_user_page(request,_username,1)
+
+# index page
+def index_page(request,_page_index):
+    return index_user_page(request,'',_page_index)
+
+# user messages view and page
+def index_user_page(request,_username,_page_index):
     
     # get user login status
     _islogin = __is_login(request)
@@ -119,13 +127,13 @@ def index_param(request,_username):
     except (KeyError):
         _is_post = False
     
-    # save messag
+    # save message
     if _is_post:
         # check login
         if not _islogin:
             return HttpResponseRedirect('/signin/')
         
-        # save message
+        # save messages
         _category = Category.objects.get(id = 1)
         try:
             _user = User.objects.get(id = __user_id(request))
@@ -133,21 +141,30 @@ def index_param(request,_username):
             return HttpResponseRedirect('/signin/')        
         _note = Note(message = _message,category = _category , user = _user)
         _note.save()
+        return HttpResponseRedirect('/user/' + _user.username)
+    
+    
   
+    _userid = -1
     # get message list
+    _offset_index = (int(_page_index) - 1) * PAGE_SIZE
+    _last_item_index = PAGE_SIZE * int(_page_index)
     if _username != '':
         # there is get user's messages
         _user = get_object_or_404(User,username=_username)
-        _notes = Note.objects.filter(user = _user).order_by('-addtime')[0:PAGE_SIZE]
+        _userid = _user.id
+        _notes = Note.objects.filter(user = _user).order_by('-addtime')[_offset_index:_last_item_index]
     else:
-        # get all messages
-        _notes = Note.objects.order_by('-addtime')[0:PAGE_SIZE]
-        
+        # get all messages        
+        _notes = Note.objects.order_by('-addtime')[_offset_index:_last_item_index]
+
+    
     # body content
     _template = loader.get_template('index.html')
     _context = Context({
         'notes' : _notes,
-        'islogin' : _islogin
+        'islogin' : _islogin,
+        "userid" : _userid,
         })
     
     _output = _header + _template.render(_context) + footer    
@@ -175,7 +192,34 @@ def detail(request,_id):
     
     return HttpResponse(_output)
 
+def detail_delete(request,_id):
+    # get user login status
+    _islogin = __is_login(request)    
+    # header
+    _header = __get_header('message %s' % _id,request)
 
+    _note = get_object_or_404(Note,id=_id)
+    
+    # body content
+    _template = loader.get_template('detail_delete.html')
+   
+    _message = ""
+    
+    try:
+        _note.delete()
+        _message = "message deleted."
+    except:
+        _message = "delete was error."
+    
+    _context = Context({
+        'message' :_message 
+        })
+    
+    _output = _header + _template.render(_context) + footer
+    
+    return HttpResponse(_output)
+    
+    
 
 # signin view
 def signin(request):

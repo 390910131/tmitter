@@ -26,7 +26,12 @@
                 <p class="message"><a href="/user/{{ item.user.username }}" class="name">{{ item.user.realname }}</a> {{ item.message }} <a href="/message/{{ item.id }}">详细...</a><p>
                 <p class="info">
                     <span class="date">{{ item.addtime }}</span>
-                    <span class="category">通过{{ item.category.name }}</span>                    
+                    <span class="category">通过{{ item.category.name }}</span>
+                    {% if islogin %}
+                    {% ifequal userid item.user.id %}
+                    <span class="delete"><a href="/message/{{ item.id }}/delete">删除</a></span>
+                    {% endifequal  %}
+                    {% endif %}
                 </p>
                 
             </li>
