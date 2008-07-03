@@ -28,7 +28,7 @@ def __get_header(_title,request):
 def __get_footer():
     _template = loader.get_template('footer.html')
     _context = Context({
-        'version' : '0.1'
+        'version' : APP_VERSION
         })
     return _template.render(_context)
 
@@ -86,8 +86,73 @@ def __check_login(_username,_password):
 
     
     return _state
+
+# check user was existed
+def __check_username_exist(_username):
+    _exist = True
+    
+    try:
+        _user = User.objects.get(username = _username)
+        _exist = True
+    except (User.DoesNotExist):
+        _exist = False
+
+    return _exist
+
+# post signup data
+def __do_signup(request,_userinfo):
+
+    _state = {
+            'success' : False,
+            'message' : '',
+        }
+
+    # check username exist
+    if(_userinfo['username'] == ''):
+        _state['success'] = False
+        _state['message'] = 'username is null.'
+        return _state
+
+    if(_userinfo['password'] == ''):
+        _state['success'] = False
+        _state['message'] = 'password is null.'
+        return _state
+
+    if(_userinfo['realname'] == ''):
+        _state['success'] = False
+        _state['message'] = 'realname is null.'
+        return _state
+
+    if(_userinfo['email'] == ''):
+        _state['success'] = False
+        _state['message'] = 'email is null.'
+        return _state
+    
+    # check username exist
+    if(__check_username_exist(_userinfo['username'])):
+        _state['success'] = False
+        _state['message'] = 'username war existed.'
+        return _state
+
     
 
+    # check password & confirm password
+    if(_userinfo['password'] != _userinfo['confirm']):
+        _state['success'] = False
+        _state['message'] = 'confirm password not right.'
+        return _state
+
+    _user = User(username = _userinfo['username'],realname = _userinfo['realname'] , password = _userinfo['password'],email = _userinfo['email'])
+    try:
+        _user.save()
+        _state['success'] = True
+        _state['message'] = 'successed.'
+    except:
+        _state['success'] = False
+        _state['message'] = 'post data error.'
+
+    return _state
+    
 
 
 # #################
@@ -257,6 +322,64 @@ def signin(request):
         })
     _output = _header + _template.render(_context) + footer    
     return HttpResponse(_output)
+
+def signup(request):
+    # check is login
+    _islogin = __is_login(request)
+
+    if(_islogin):
+        return HttpResponseRedirect('/')
+    
+    # header
+    _header = __get_header('signup',request)
+
+    _userinfo = {
+            'username' : '',
+            'password' : '',
+            'confirm' : '',
+            'realname' : '',
+            'email' : '',
+        }
+    
+    try:
+        # get post params
+        _userinfo = {
+            'username' : request.POST['username'],
+            'password' : request.POST['password'],
+            'confirm' : request.POST['confirm'],
+            'realname' : request.POST['realname'],
+            'email' : request.POST['email'],
+        }
+        _is_post = True
+    except (KeyError):        
+        _is_post = False
+
+    if(_is_post):
+        _state = __do_signup(request,_userinfo)
+    else:
+        _state = {
+            'success' : False,
+            'message' : 'signup a new user'
+        }
+
+    _result = {
+            'success' : _state['success'],
+            'message' : _state['message'],
+            'form' : {
+                    'username' : _userinfo['username'],
+                    'realname' : _userinfo['realname'],
+                    'email' : _userinfo['email'],
+                }
+        }
+
+    # body content
+    _template = loader.get_template('signup.html')
+    _context = Context({
+        'state' : _result,
+        })
+    _output = _header + _template.render(_context) + footer    
+    return HttpResponse(_output)
+    
 
 # signout view
 def signout(request):
