@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     (r'^signup/$','tmitter.mvc.views.signup'),
     (r'^message/(?P<_id>\d+)/$','tmitter.mvc.views.detail'),
     (r'^message/(?P<_id>\d+)/delete/$','tmitter.mvc.views.detail_delete'),
+    (r'^mail/$','tmitter.utils.mailer.test'),
     # Uncomment this for admin:
     (r'^admin/', include('django.contrib.admin.urls')),
 )

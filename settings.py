@@ -28,6 +28,9 @@ TIME_ZONE = 'America/Chicago'
 # http://blogs.law.harvard.edu/tech/stories/storyReader$15
 LANGUAGE_CODE = 'zh-cn'
 
+DEFAULT_CHARSET = "utf-8"
+
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -80,6 +83,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'tmitter.mvc',
+    'tmitter.utils',
 )
 
 
@@ -90,3 +94,9 @@ APP_VERSION = '0.2'
 APP_COMPANY = 'Wathon Team'
 APP_LICENSE = 'GNU General Public License v2'
 PAGE_SIZE = 5
+
+# Email server configures
+EMAIL_HOST = 'smtp.foxmail.com'
+EMAIL_HOST_PASSWORD = '123123'
+EMAIL_HOST_USER = 'huacnlee@foxmail.com'
+EMAIL_SUBJECT_PREFIX = '[Tmitter]'

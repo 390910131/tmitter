@@ -1,11 +1,10 @@
+# -*- coding: utf-8 -*-
 from django.http import HttpResponse,Http404, HttpResponseRedirect, HttpResponseServerError
 from django.template import Context, loader
 from django.shortcuts import get_object_or_404
 from tmitter.settings import *
 from tmitter.mvc.models import Note,User,Category
-# Create your views here.
-
-
+from tmitter.utils import mailer
 
 # #################
 # common functions
@@ -78,11 +77,11 @@ def __check_login(_username,_password):
         else:
             # password incorrect
             _state['success']  = False
-            _state['message'] = 'password incorrect.'
+            _state['message'] = u"密码不正确."
     except (User.DoesNotExist):
         # user not exist
         _state['success'] = False
-        _state['message'] = 'user does not exist.'
+        _state['message'] = '用户不存在.'
 
     
     return _state
@@ -110,28 +109,28 @@ def __do_signup(request,_userinfo):
     # check username exist
     if(_userinfo['username'] == ''):
         _state['success'] = False
-        _state['message'] = 'username is null.'
+        _state['message'] = '用户名未输入.'
         return _state
 
     if(_userinfo['password'] == ''):
         _state['success'] = False
-        _state['message'] = 'password is null.'
+        _state['message'] = '密码未输入.'
         return _state
 
     if(_userinfo['realname'] == ''):
         _state['success'] = False
-        _state['message'] = 'realname is null.'
+        _state['message'] = '姓名未输入.'
         return _state
 
     if(_userinfo['email'] == ''):
         _state['success'] = False
-        _state['message'] = 'email is null.'
+        _state['message'] = 'email未输入.'
         return _state
     
     # check username exist
     if(__check_username_exist(_userinfo['username'])):
         _state['success'] = False
-        _state['message'] = 'username war existed.'
+        _state['message'] = '用户名已存在.'
         return _state
 
     
@@ -139,17 +138,21 @@ def __do_signup(request,_userinfo):
     # check password & confirm password
     if(_userinfo['password'] != _userinfo['confirm']):
         _state['success'] = False
-        _state['message'] = 'confirm password not right.'
+        _state['message'] = '确认密码不正确.'
         return _state
 
     _user = User(username = _userinfo['username'],realname = _userinfo['realname'] , password = _userinfo['password'],email = _userinfo['email'])
     try:
         _user.save()
         _state['success'] = True
-        _state['message'] = 'successed.'
+        _state['message'] = '注册成功.'
+        
+        # send regist success mail
+        mailer.send_regist_success_mail(_userinfo)
+        
     except:
         _state['success'] = False
-        _state['message'] = 'post data error.'
+        _state['message'] = '程序异常,注册失败.'
 
     return _state
     
@@ -183,7 +186,7 @@ def index_user_page(request,_username,_page_index):
     _islogin = __is_login(request)
     
     # header
-    _header = __get_header('Home',request)
+    _header = __get_header('首页',request)
     
     try:
         # get post params
@@ -244,7 +247,7 @@ def detail(request,_id):
     _islogin = __is_login(request)
     
     # header
-    _header = __get_header('message %s' % _id,request)
+    _header = __get_header('消息 %s' % _id,request)
     
     _note = get_object_or_404(Note,id=_id)
     # body content
@@ -261,7 +264,7 @@ def detail_delete(request,_id):
     # get user login status
     _islogin = __is_login(request)    
     # header
-    _header = __get_header('message %s' % _id,request)
+    _header = __get_header('消息 %s' % _id,request)
 
     _note = get_object_or_404(Note,id=_id)
     
@@ -272,9 +275,9 @@ def detail_delete(request,_id):
     
     try:
         _note.delete()
-        _message = "message deleted."
+        _message = "消息已删除."
     except:
-        _message = "delete was error."
+        _message = "删除出错."
     
     _context = Context({
         'message' :_message 
@@ -293,7 +296,7 @@ def signin(request):
     _islogin = __is_login(request)
     
     # header
-    _header = __get_header('signin',request)
+    _header = __get_header('登录',request)
    
     try:
         # get post params
@@ -312,7 +315,7 @@ def signin(request):
     else:
         _state = {
             'success' : False,
-            'message' : 'please login'
+            'message' : '请登录'
         }
 
     # body content
@@ -331,7 +334,7 @@ def signup(request):
         return HttpResponseRedirect('/')
     
     # header
-    _header = __get_header('signup',request)
+    _header = __get_header('注册',request)
 
     _userinfo = {
             'username' : '',
@@ -359,7 +362,7 @@ def signup(request):
     else:
         _state = {
             'success' : False,
-            'message' : 'signup a new user'
+            'message' : '注册新用户'
         }
 
     _result = {
