@@ -1,0 +1,41 @@
+* { margin:0; padding:0; font-family:Tahoma, Helvetica, sans-serif;}
+* html * { font-family:Arial, sans-serif;}
+html { overflow-y:scroll;}
+body { background:#234F32; overflow:hidden; font-size:12px; line-height:150%; text-align:center;}
+
+#container{ width:220px; border:1px solid #CEE6B0; overflow:hidden;  margin:5px auto; text-align:left; background:#F8F8F8;}
+
+#header { height:45px; background:#89C342; padding:10px; }
+#header h1 { font-size:16px; margin-bottom:8px; }
+#header h1 a {color:#FFFFFF; font-weight:bolder; text-decoration:none; margin:0; padding:0;}
+#nav { list-style:none; font-size:12px;}
+#nav li { float:left; margin-right:8px;}
+#nav a:link,#nav a:visited { color:#132B1B; }
+#nav span{}
+
+#footer {margin:5px; font-size:11px; color:#234F32; text-align:center; border-top:1px solid #89C342; line-height:24px; background:#A1CF69; }
+#footer a { color:#234F32;}
+
+#main { padding:10px;}
+#main a:link,#main a:visited{ color:#008881;}
+#main h5 { font-size:12px; font-weight:bold;}
+#main .list { margin:0; }
+#main .list ol { list-style:none; list-style-position:outside;}
+#main .list ol li { padding:5px 0; border-bottom:1px solid #DDD; color:#444; }
+#main .list ol li .message { text-align:justify; text-align:inter-ideograph; }
+#main .list ol li .info {display:block; text-align:right;color:#999;}
+#main .list ol li .category { }
+#main .list ol li .date { color:#999; }
+
+.form { margin:0px;}
+.form table {width:100%; }
+.form table tr td { padding:2px;}
+.form table tr td.field { width:70px; text-align:right;}
+.form input.text,.form textarea.text  {font-size:12px; border-top:1px solid #aaa;border-left:1px solid #aaa;border-bottom:1px solid #ddd;border-right:1px solid #ddd; padding:2px; }
+.form button.submit { font-size:12px; border-top:1px solid #C9E3A8;border-left:1px solid #C9E3A8;border-bottom:1px solid #73A635;border-right:1px solid #73A635; height:22px; line-height:22px; padding:0 3px; background:#89C342; color:#333;}
+.form button.wide {padding:0px 10px;}
+
+#post-message { border-bottom:1px solid #DDD; padding-bottom:8px;}
+#post-message .input { padding-bottom:3px; }
+#post-message .input textarea { width:195px; overflow:hidden;}
+#post-message .buttons { text-align:left;}

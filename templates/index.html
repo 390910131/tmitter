@@ -1,41 +1,40 @@
-
-
-    <div id="main">
-        {% if islogin %}
-        <div id="post-message" class="form">
-            <form method="post" action="/">                
-                <table cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td>我在做什么？</td>
-                        <td class="word-count">可以输入 <span id="word-count">140</span> 个字</td>
-                    </tr>
-                </table>
-                <div class="input">
-                    <textarea name="message" class="text" rows="3"></textarea>
-                </div>
-                <div class="buttons">
-                    <button type="submit" class="submit wide">发送</button>
-                </div>
-            </form>
-        </div>
-        {% endif %}
-        <div class="list">
-            <ol>
-            {% for item in notes %}
-            <li>
-                <p class="message"><a href="/user/{{ item.user.username }}" class="name">{{ item.user.realname }}</a> {{ item.message }} <a href="/message/{{ item.id }}">详细...</a><p>
-                <p class="info">
-                    <span class="date">{{item.addtime }}</span>
-                    <span class="category">通过{{ item.category.name }}</span>
-                    {% if islogin %}
-                    {% ifequal userid item.user.id %}
-                    <span class="delete"><a href="/message/{{ item.id }}/delete">删除</a></span>
-                    {% endifequal  %}
-                    {% endif %}
-                </p>
-                
-            </li>
-            {% endfor %}
-            </ol>
-        </div>
+{% extends "base.html" %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block  main %}
+    {% if islogin %}
+    <div id="post-message" class="form">
+        <form method="post" action="/">                
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td>我在做什么？</td>
+                    <td class="word-count">可以输入 <span id="word-count">140</span> 个字</td>
+                </tr>
+            </table>
+            <div class="input">
+                <textarea name="message" class="text" rows="3"></textarea>
+            </div>
+            <div class="buttons">
+                <button type="submit" class="submit wide">发送</button>
+            </div>
+        </form>
     </div>
+    {% endif %}
+    <div class="list">
+        <ol>
+        {% for item in notes %}
+        <li>
+            <p class="message"><a href="/user/{{ item.user.username }}" class="name">{{ item.user.realname }}</a> {{ item.message }} <a href="/message/{{ item.id }}">详细...</a><p>
+            <p class="info">
+                <span class="date">{{item.addtime }}</span>
+                <span class="category">通过{{ item.category.name }}</span>
+                {% if islogin %}
+                {% ifequal userid item.user.id %}
+                <span class="delete"><a href="/message/{{ item.id }}/delete">删除</a></span>
+                {% endifequal  %}
+                {% endif %}
+            </p>            
+        </li>
+        {% endfor %}
+        </ol>
+    </div>
+{% endblock %}

@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
 import time
 from django.db import models
+from django.contrib import admin
 from django.utils import timesince
 
 _list_per_page = 50
 
 # category model
 class Category(models.Model):
-    name = models.CharField(maxlength=20)
+    name = models.CharField(max_length=20)
     
-    class Admin:
-        list_display = ('id','name')
-        list_display_links = ('id','name')
-        list_per_page = _list_per_page
-        pass
+    
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id','name')
+    list_display_links = ('id','name')
+    list_per_page = _list_per_page
 
     
 # User model
@@ -24,14 +25,14 @@ class User(models.Model):
     )
 
     username = models.CharField(
-        maxlength = 20
+        max_length = 20
     )
     password = models.CharField(
-        maxlength = 32
+        max_length = 32
     )
     
     realname = models.CharField(
-        maxlength = 20
+        max_length = 20
     )
     
     email = models.EmailField()
@@ -40,16 +41,14 @@ class User(models.Model):
         auto_now = True
     )
     
-    class Admin:       
-        list_display = ('id','username','realname','email','addtime_format')
-        list_display_links = ('username','realname','email')
-        list_per_page = _list_per_page
-        pass
-    
     def addtime_format(self):
         return self.addtime.strftime('%Y-%m-%d %H:%M:%S')
     
-        
+class UserAdmin(admin.ModelAdmin):       
+    list_display = ('id','username','realname','email','addtime_format')
+    list_display_links = ('username','realname','email')
+    list_per_page = _list_per_page
+
 
 # Note model
 class Note(models.Model):
@@ -61,12 +60,6 @@ class Note(models.Model):
     addtime = models.DateTimeField(auto_now = True,core=True)
     category = models.ForeignKey(Category,core=True)
     user = models.ForeignKey(User,core = True)
-    
-    class Admin:
-        list_display = ('id','user_name','message_short','addtime_format_admin','category_name')
-        list_display_links = ('id','message_short')
-        list_per_page = _list_per_page
-        pass
     
     def message_short(self):
         return self.message
@@ -84,3 +77,13 @@ class Note(models.Model):
     
     def timesince(self):
         return timesince.timesince(self.addtime,time.time())
+
+class NoteAdmin(admin.ModelAdmin):
+    list_display = ('id','user_name','message_short','addtime_format_admin','category_name')
+    list_display_links = ('id','message_short')
+    list_per_page = _list_per_page
+
+
+admin.site.register(Note, NoteAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(User,UserAdmin)

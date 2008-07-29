@@ -10,29 +10,6 @@ from tmitter.utils import mailer
 # common functions
 # #################
 
-# header template
-def __get_header(_title,request):
-    
-    _template = loader.get_template('header.html')
-    _context = Context({
-        'title' : _title,
-        'app_name' : APP_NAME,
-        'beta' : True,
-        'islogin' : __is_login(request),
-        'username' : __user_name(request),
-        })
-    return _template.render(_context)
-
-# footer template
-def __get_footer():
-    _template = loader.get_template('footer.html')
-    _context = Context({
-        'version' : APP_VERSION
-        })
-    return _template.render(_context)
-
-
-
 # do login
 def __do_login(request,_username,_password):
     _state = __check_login(_username,_password)
@@ -146,30 +123,45 @@ def __do_signup(request,_userinfo):
         _user.save()
         _state['success'] = True
         _state['message'] = '注册成功.'
-        
-        # send regist success mail
-        mailer.send_regist_success_mail(_userinfo)
-        
     except:
         _state['success'] = False
         _state['message'] = '程序异常,注册失败.'
+    
+    # send regist success mail
+    mailer.send_regist_success_mail(_userinfo)
 
     return _state
-    
 
+
+# response result message page
+def __result_message(request,_title=u'消息',_message='',_go_back_url=''):
+    # body content
+    _template = loader.get_template('result_message.html')
+    
+    _context = Context({
+        'page_title' : _title,
+        'message' : _message,
+        'go_back_url' : _go_back_url,
+    })
+    
+    _output = _template.render(_context)
+    
+    return HttpResponse(_output)
+    
+    
 
 # #################
 # view method
 # #################
 
-# define header html from __get_header
-header = ''
-# define footer html from __get_header
-footer = __get_footer()
-
 # home view
 def index(request):
     return index_user(request,'')
+
+# user messages view by self
+def index_user_self(request):
+    _user_name = __user_name(request)
+    return index_user(request,_user_name)
 
 # user messages view
 def index_user(request,_username):
@@ -184,9 +176,6 @@ def index_user_page(request,_username,_page_index):
     
     # get user login status
     _islogin = __is_login(request)
-    
-    # header
-    _header = __get_header('首页',request)
     
     try:
         # get post params
@@ -230,12 +219,13 @@ def index_user_page(request,_username,_page_index):
     # body content
     _template = loader.get_template('index.html')
     _context = Context({
+        'page_title' : u'首页',
         'notes' : _notes,
         'islogin' : _islogin,
         "userid" : _userid,
         })
     
-    _output = _header + _template.render(_context) + footer    
+    _output = _template.render(_context)    
     
     return HttpResponse(_output)
 
@@ -246,47 +236,33 @@ def detail(request,_id):
     # get user login status
     _islogin = __is_login(request)
     
-    # header
-    _header = __get_header('消息 %s' % _id,request)
-    
     _note = get_object_or_404(Note,id=_id)
     # body content
     _template = loader.get_template('detail.html')
     _context = Context({
-        'item' :_note 
+        'page_title' : u'消息 %s' % _id,
+        'item' :_note,
         })
     
-    _output = _header + _template.render(_context) + footer
+    _output = _template.render(_context)
     
     return HttpResponse(_output)
 
 def detail_delete(request,_id):
     # get user login status
     _islogin = __is_login(request)    
-    # header
-    _header = __get_header('消息 %s' % _id,request)
 
     _note = get_object_or_404(Note,id=_id)
-    
-    # body content
-    _template = loader.get_template('detail_delete.html')
    
     _message = ""
     
     try:
         _note.delete()
-        _message = "消息已删除."
+        _message = u"消息已删除."
     except:
-        _message = "删除出错."
+        _message = u"删除出错."
     
-    _context = Context({
-        'message' :_message 
-        })
-    
-    _output = _header + _template.render(_context) + footer
-    
-    return HttpResponse(_output)
-    
+    return __result_message(request,u'消息 %s' % _id,_message) 
     
 
 # signin view
@@ -294,9 +270,6 @@ def signin(request):
     
     # get user login status
     _islogin = __is_login(request)
-    
-    # header
-    _header = __get_header('登录',request)
    
     try:
         # get post params
@@ -311,7 +284,7 @@ def signin(request):
         _state = __do_login(request,_username,_password)
 
         if _state['success']:
-            return HttpResponseRedirect('/')
+            return __result_message(request,u'登录成功',u'恭喜，您已经登录成功。') 
     else:
         _state = {
             'success' : False,
@@ -321,9 +294,10 @@ def signin(request):
     # body content
     _template = loader.get_template('signin.html')
     _context = Context({
+        'page_title' : u'登录',
         'state' : _state,
         })
-    _output = _header + _template.render(_context) + footer    
+    _output = _template.render(_context)
     return HttpResponse(_output)
 
 def signup(request):
@@ -332,9 +306,6 @@ def signup(request):
 
     if(_islogin):
         return HttpResponseRedirect('/')
-    
-    # header
-    _header = __get_header('注册',request)
 
     _userinfo = {
             'username' : '',
@@ -364,6 +335,9 @@ def signup(request):
             'success' : False,
             'message' : '注册新用户'
         }
+    
+    if(_state['success']):
+        return __result_message(request,u'注册成功',u'恭喜，您已经注册成功。') 
 
     _result = {
             'success' : _state['success'],
@@ -378,9 +352,10 @@ def signup(request):
     # body content
     _template = loader.get_template('signup.html')
     _context = Context({
+        'page_title' : u'注册',
         'state' : _result,
         })
-    _output = _header + _template.render(_context) + footer    
+    _output = _template.render(_context)  
     return HttpResponse(_output)
     
 

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block  main %}
+<div class="message">{{ message }}</div>
+{% if go_back_url %}
+<a href="{{ go_back_url }}">返回</a>
+{% else %}
+<a href="/">返回</a>
+{% endif %}
+{% endblock %}

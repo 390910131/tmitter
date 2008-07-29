@@ -3,13 +3,13 @@ from django.core.mail import send_mail
 
 FROM_EMAIL = 'huacnlee@foxmail.com'
 
-MAIL_FOOT = '''<br/><br/><br/>
+MAIL_FOOT = u'''<br/><br/><br/>
 Tmitter开发小组.<br/>
 <a href="http://www.tmitter.com">tmitter.com</a>'''
 
 def send_regist_success_mail(userinfo):
-    subject = '注册成功'
-    body = '''你好！<b>%s</b><br />
+    subject = u'注册成功'
+    body = u'''你好！<b>%s</b><br />
     你已经成功注册成为Tmitter用户<br />
     以下是您的信息：<br />
     <ul>

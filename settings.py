@@ -10,7 +10,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
-DATABASE_NAME = './database/tmitter.sqlite'             # Or path to database file if using sqlite3.
+DATABASE_NAME = './db/tmitter.sqlite'             # Or path to database file if using sqlite3.
 DATABASE_USER = ''             # Not used with sqlite3.
 DATABASE_PASSWORD = ''         # Not used with sqlite3.
 DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
@@ -90,7 +90,7 @@ INSTALLED_APPS = (
 
 # Custom configures
 APP_NAME = 'Tmitter'
-APP_VERSION = '0.2'
+APP_VERSION = '0.2.1'
 APP_COMPANY = 'Wathon Team'
 APP_LICENSE = 'GNU General Public License v2'
 PAGE_SIZE = 5
