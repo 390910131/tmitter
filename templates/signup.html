@@ -1,0 +1,33 @@
+<div id="main">
+    <div class="form">
+        <div class="message">{{ state.message }}</div>
+        <form action="/signup/" method="post">
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="field">用户名：</td>
+                    <td><input type="text" name="username" value="{{ state.form.username }}" class="text" size="12" /></td>
+                </tr>
+                <tr>
+                    <td class="field">姓名：</td>
+                    <td><input type="text" name="realname" class="text" value="{{ state.form.realname }}" size="5" /></td>
+                </tr>
+                <tr>
+                    <td class="field">Email：</td>
+                    <td><input type="text" name="email" class="text"  value="{{ state.form.email }}" size="16" /></td>
+                </tr>
+                <tr>
+                    <td class="field">密码：</td>
+                    <td><input type="password" name="password" class="text" size="16" /></td>
+                </tr>
+                <tr>
+                    <td class="field">确认密码：</td>
+                    <td><input type="password" name="confirm" class="text" size="16" /></td>
+                </tr>
+                <tr>
+                    <td class="field"></td>
+                    <td><button type="submit" class="submit">注册</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
