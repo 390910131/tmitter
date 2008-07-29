@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import time
 from django.db import models
+from django.utils import timesince
 
 _list_per_page = 50
 
@@ -80,3 +81,6 @@ class Note(models.Model):
     
     def user_name(self):
         return self.user.realname
+    
+    def timesince(self):
+        return timesince.timesince(self.addtime,time.time())
