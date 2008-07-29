@@ -1,7 +1,31 @@
-1.��װ Django
-2.��װ MySQL-python-1.2.2
-3.��ΪMySql �������ݿ� tmitter �� �޸� settings.py �ڵ� DATABASE_NAME ֵΪ����ʹ�õ����ݿ���������mysql���洴�������ݿ⡣
-4.������ڣ�������tmitterԴ����Ŀ¼��ִ�� manage.py syncdb ���������ʾ��ɲ��������� Django Ϊ�Զ�Ϊ���Ǵ�����صı���
-5.���� manage.py runserver ���Ὺʼ����web��������������ʾ�����ĵ�ַ���磺http://127.0.0.1:8000/
+1) 安装 Django<http://www.djangoproject.com/documentation/install/>
+
+
+2) 选择数据库，Sqlite3 或 PostgreSQL 或 MySQL
+
+	2.1) Sqlite 安装说明
+		2.1.1) 安装 pysqlite<http://initd.org/tracker/pysqlite>	
+		2.1.2) 我们的源代码里面默认就带有Sqlite的数据库文件，在 tmitter/db 下面，请直接把 tmitterd.db 删除掉。
+		
+		
+	2.2) PostgerSQL 安装说明	
+		2.2.1) 如果你使用 PostgreSQL 的话，请先安装 PostgreSQL 并创建数据库 tmitter 
+		2.2.2) 修改 settings.py 的数据库配置部分的用户名密码,请将下面一段替换相应的地方		
+			DATABASE_ENGINE = 'postgresql3'
+			DATABASE_NAME = 'tmitter'
+			DATABASE_USER = 'monster' # 请将 monster 改为你的PostgreSQL账号的用户名
+			DATABASE_PASSWORD = '123123' # 请将 12123 改为你的PostgreSQL账号的密码
+			DATABASE_HOST = '127.0.0.1' # 请将 127.0.0.1 改为你的PostgreSQL的服务器地址
+			DATABASE_PORT = '' # 这里是 PostgreSQL的端口号，如果是默认的这里就留空
+		2.2.3) 安装 psycopg<http://initd.org/tracker/psycopg>
+		
+	2.3) MySQL 安装说明
+		2.2.1) 下载安装 MySQL,并创建 tmitter 数据库，并修改 settings.py 把 DATABASE_ENGINE 的值改为 'mysql' 其它后面的 DATABASE相关的设置与 PostgreSQL的设置基本类似
+		2.2.2) 安装 mysql-python<http://sourceforge.net/projects/mysql-python> 
+
+3.打开命令窗口，并进入tmitter源代码目录，执行 manage.py syncdb 命令，根据提示完成操作。这样 Django 为自动为我们创建相关的表。
+
+
+4.运行 manage.py runserver 将会开始运行web服务器，最后打开提示出来的地址，如：http://127.0.0.1:8000/
 
 
