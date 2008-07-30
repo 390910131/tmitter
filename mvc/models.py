@@ -2,7 +2,8 @@
 import time
 from django.db import models
 from django.contrib import admin
-from django.utils import timesince
+from django.utils import timesince,html
+from tmitter.utils import formatter
 
 _list_per_page = 50
 
@@ -77,6 +78,13 @@ class Note(models.Model):
     
     def timesince(self):
         return timesince.timesince(self.addtime,time.time())
+    
+    def save(self):
+        self.message = formatter.content_tiny_url(self.message)
+        self.message = html.escape(self.message)
+        self.message = formatter.substr(self.message,140)
+        super(Note, self).save()
+    
 
 class NoteAdmin(admin.ModelAdmin):
     list_display = ('id','user_name','message_short','addtime_format_admin','category_name')

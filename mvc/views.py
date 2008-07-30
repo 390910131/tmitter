@@ -222,7 +222,7 @@ def index_user_page(request,_username,_page_index):
         'page_title' : u'首页',
         'notes' : _notes,
         'islogin' : _islogin,
-        "userid" : _userid,
+        'userid' : __user_id(request),
         })
     
     _output = _template.render(_context)    
@@ -242,7 +242,9 @@ def detail(request,_id):
     _context = Context({
         'page_title' : u'消息 %s' % _id,
         'item' :_note,
-        })
+        'islogin' : _islogin,
+        'userid' : __user_id(request),
+    })
     
     _output = _template.render(_context)
     

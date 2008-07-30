@@ -22,10 +22,12 @@ body { background:#234F32; overflow:hidden; font-size:12px; line-height:150%; te
 #main .list { margin:0; }
 #main .list ol { list-style:none; list-style-position:outside;}
 #main .list ol li { padding:5px 0; border-bottom:1px solid #DDD; color:#444; }
-#main .list ol li .message { text-align:justify; text-align:inter-ideograph; }
+#main .list ol li .message { }
+#main .list ol li .message .more {margin-left:2px;}
 #main .list ol li .info {display:block; text-align:right;color:#999;}
+#main .list ol li .info span { margin-left:2px;}
 #main .list ol li .category { }
-#main .list ol li .date { color:#999; }
+#main .list ol li .date { color:#999;}
 
 .form { margin:0px;}
 .form table {width:100%; }

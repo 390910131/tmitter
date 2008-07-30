@@ -4,13 +4,19 @@
 <div class="list">
     <ol>
     <li>
-        <h5>消息：<span>{{ item.id }}</span></h5>
-        <p class="message"><a href="/user/{{ item.user.username }}" class="username">{{ item.user.realname }}</a>  {{ item.message }}<p>
+        <p class="message">
+            <a href="{% url mvc.views.index_user item.user.username %}" class="name">{{ item.user.realname }}</a>
+            {{ item.message|urlize }}
+        <p>
         <p class="info">
-            <span class="date">{{ item.addtime }}</span>
-            <span class="category">通过{{ item.category.name }}</span>                    
-        </p>
-        
+            <span class="date">{{ item.addtime|timesince }}前</span>
+            <span class="category">通过{{ item.category.name }}</span>
+            {% if islogin %}
+            {% ifequal userid item.user.id %}
+            <span class="delete"><a href="{% url mvc.views.detail_delete item.id %}">删除</a></span>
+            {% endifequal  %}
+            {% endif %}
+        </p>            
     </li>
     </ol>
 </div>
