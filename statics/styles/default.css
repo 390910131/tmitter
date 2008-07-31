@@ -28,6 +28,8 @@ body { background:#234F32; overflow:hidden; font-size:12px; line-height:150%; te
 #main .list ol li .info span { margin-left:2px;}
 #main .list ol li .category { }
 #main .list ol li .date { color:#999;}
+#main .list .pagebar { margin:3px 0; text-align:right;}
+#main .list .pagebar span { margin-left:2px;}
 
 .form { margin:0px;}
 .form table {width:100%; }
