@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.contrib import admin
-
+admin.autodiscover()
 urlpatterns = patterns('',
     # Example:
     # (r'^note/', include('note.foo.urls')),
@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     (r'^p/(?P<_page_index>\d+)/$','tmitter.mvc.views.index_page'),
     (r'^user/$','tmitter.mvc.views.index_user_self'),
     (r'^user/(?P<_username>[a-zA-Z\-_\d]+)/$','tmitter.mvc.views.index_user'),
+    (r'^user/(?P<_username>[a-zA-Z\-_\d]+)/(?P<_page_index>\d+)/$','tmitter.mvc.views.index_user_page'),
     (r'^signin/$','tmitter.mvc.views.signin'),
     (r'^signout/$','tmitter.mvc.views.signout'),
     (r'^signup/$','tmitter.mvc.views.signup'),

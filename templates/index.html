@@ -11,7 +11,7 @@
                 </tr>
             </table>
             <div class="input">
-                <textarea name="message" class="text" rows="3"></textarea>
+                <textarea name="message" class="text"></textarea>
             </div>
             <div class="buttons">
                 <button type="submit" class="submit wide">发送</button>
@@ -39,5 +39,6 @@
         </li>
         {% endfor %}
         </ol>
+        <div class="pagebar">{{ page_bar|safe }}</div>
     </div>
 {% endblock %}

@@ -2,9 +2,10 @@
 from django.http import HttpResponse,Http404, HttpResponseRedirect, HttpResponseServerError
 from django.template import Context, loader
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
 from tmitter.settings import *
 from tmitter.mvc.models import Note,User,Category
-from tmitter.utils import mailer
+from tmitter.utils import mailer,formatter
 
 # #################
 # common functions
@@ -206,15 +207,21 @@ def index_user_page(request,_username,_page_index):
     # get message list
     _offset_index = (int(_page_index) - 1) * PAGE_SIZE
     _last_item_index = PAGE_SIZE * int(_page_index)
+
     if _username != '':
         # there is get user's messages
         _user = get_object_or_404(User,username=_username)
         _userid = _user.id
-        _notes = Note.objects.filter(user = _user).order_by('-addtime')[_offset_index:_last_item_index]
+        _notes = Note.objects.filter(user = _user).order_by('-addtime')
     else:
         # get all messages        
-        _notes = Note.objects.order_by('-addtime')[_offset_index:_last_item_index]
+        _notes = Note.objects.order_by('-addtime')
 
+    # page bar
+    _page_bar = formatter.pagebar(_notes,_page_index,_username)
+    
+    # get current page
+    _notes = _notes[_offset_index:_last_item_index]
     
     # body content
     _template = loader.get_template('index.html')
@@ -223,6 +230,7 @@ def index_user_page(request,_username,_page_index):
         'notes' : _notes,
         'islogin' : _islogin,
         'userid' : __user_id(request),
+        'page_bar' : _page_bar,
         })
     
     _output = _template.render(_context)    
