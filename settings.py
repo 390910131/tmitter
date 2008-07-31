@@ -90,7 +90,7 @@ INSTALLED_APPS = (
 
 # Custom configures
 APP_NAME = 'Tmitter'
-APP_VERSION = '0.2.1'
+APP_VERSION = '0.2.2'
 APP_COMPANY = 'Wathon Team'
 APP_LICENSE = 'GNU General Public License v2'
 PAGE_SIZE = 5
