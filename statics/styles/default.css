@@ -1,5 +1,5 @@
 * { margin:0; padding:0; font-family:Tahoma, Helvetica, sans-serif;}
-* html * { font-family:Arial, sans-serif;}
+* html * { font-family:Arial, sans-serif; font-size:12px;}
 html { overflow-y:scroll;}
 body { background:#234F32; overflow:hidden; font-size:12px; line-height:150%; text-align:center;}
 
