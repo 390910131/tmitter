@@ -93,7 +93,7 @@ APP_NAME = 'Tmitter'
 APP_VERSION = '0.2.2'
 APP_COMPANY = 'Wathon Team'
 APP_LICENSE = 'GNU General Public License v2'
-PAGE_SIZE = 5
+PAGE_SIZE = 4
 
 # Email server configures
 EMAIL_HOST = 'smtp.foxmail.com'

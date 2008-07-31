@@ -177,6 +177,7 @@ def index_user_page(request,_username,_page_index):
     
     # get user login status
     _islogin = __is_login(request)
+    _page_title = u'首页'
     
     try:
         # get post params
@@ -200,9 +201,7 @@ def index_user_page(request,_username,_page_index):
         _note = Note(message = _message,category = _category , user = _user)
         _note.save()
         return HttpResponseRedirect('/user/' + _user.username)
-    
-    
-  
+          
     _userid = -1
     # get message list
     _offset_index = (int(_page_index) - 1) * PAGE_SIZE
@@ -213,6 +212,7 @@ def index_user_page(request,_username,_page_index):
         _user = get_object_or_404(User,username=_username)
         _userid = _user.id
         _notes = Note.objects.filter(user = _user).order_by('-addtime')
+        _page_title = u'%s' % _user.realname 
     else:
         # get all messages        
         _notes = Note.objects.order_by('-addtime')
@@ -225,8 +225,9 @@ def index_user_page(request,_username,_page_index):
     
     # body content
     _template = loader.get_template('index.html')
+
     _context = Context({
-        'page_title' : u'首页',
+        'page_title' : _page_title,
         'notes' : _notes,
         'islogin' : _islogin,
         'userid' : __user_id(request),
@@ -245,10 +246,12 @@ def detail(request,_id):
     _islogin = __is_login(request)
     
     _note = get_object_or_404(Note,id=_id)
+    
     # body content
     _template = loader.get_template('detail.html')
+    
     _context = Context({
-        'page_title' : u'消息 %s' % _id,
+        'page_title' : u'%s的消息 %s' % (_note.user.realname,_id),
         'item' :_note,
         'islogin' : _islogin,
         'userid' : __user_id(request),
