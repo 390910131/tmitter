@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block title %}{{ page_title }}{% endblock %}
+{% block head_link %}
+{% if user %}
+<link rel="alternate" type="application/rss+xml" title="{{ user.realname }}的最新消息" href="/user/feed/rss/recent/{{ user.username }}" />
+{% else %}
+<link rel="alternate" type="application/rss+xml" title="所有人的最新消息" href="/feed/rss/recent/" />
+{% endif %}
+{% endblock %}
 {% block  main %}
     {% if islogin %}
     <div id="post-message" class="form">

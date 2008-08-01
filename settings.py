@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Django settings for note project.
 
 DEBUG = True
@@ -89,11 +90,17 @@ INSTALLED_APPS = (
 
 
 # Custom configures
+APP_DOMAIN = 'http://127.0.0.1:8000/'
 APP_NAME = 'Tmitter'
 APP_VERSION = '0.2.2'
 APP_COMPANY = 'Wathon Team'
 APP_LICENSE = 'GNU General Public License v2'
+
+# 全局分页的每页条数
 PAGE_SIZE = 4
+
+# Feed 相关的设置
+FEED_ITEM_MAX = 20
 
 # Email server configures
 EMAIL_HOST = 'smtp.foxmail.com'

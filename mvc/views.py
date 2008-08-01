@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from tmitter.settings import *
 from tmitter.mvc.models import Note,User,Category
+from tmitter.mvc.feed import RSSRecentNotes,RSSUserRecentNotes
 from tmitter.utils import mailer,formatter
 
 # #################
@@ -212,9 +213,10 @@ def index_user_page(request,_username,_page_index):
         _user = get_object_or_404(User,username=_username)
         _userid = _user.id
         _notes = Note.objects.filter(user = _user).order_by('-addtime')
-        _page_title = u'%s' % _user.realname 
+        _page_title = u'%s' % _user.realname
     else:
-        # get all messages        
+        # get all messages
+        _user = None
         _notes = Note.objects.order_by('-addtime')
 
     # page bar
@@ -231,6 +233,7 @@ def index_user_page(request,_username,_page_index):
         'notes' : _notes,
         'islogin' : _islogin,
         'userid' : __user_id(request),
+        'user' : _user,
         'page_bar' : _page_bar,
         })
     

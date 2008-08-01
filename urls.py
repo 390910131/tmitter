@@ -1,6 +1,18 @@
+# -*- coding: utf-8 -*-
 from django.conf.urls.defaults import *
 from django.contrib import admin
+from tmitter.mvc.feed import RSSRecentNotes,RSSUserRecentNotes
+
 admin.autodiscover()
+
+rss_feeds = {
+    'recent': RSSRecentNotes,
+}
+
+rss_user_feeds = {
+    'recent': RSSUserRecentNotes,
+}
+
 urlpatterns = patterns('',
     # Example:
     # (r'^note/', include('note.foo.urls')),
@@ -17,6 +29,8 @@ urlpatterns = patterns('',
     (r'^mail/$','tmitter.utils.mailer.test'),
     # Uncomment this for admin:
     (r'^admin/(.*)',admin.site.root),
+    (r'^feed/rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_feeds}),
+    (r'^user/feed/rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_user_feeds}),
     (r'^styles/(?P<path>.*)$', 'django.views.static.serve', {'document_root': './statics/styles'}),
     (r'^scripts/(?P<path>.*)$', 'django.views.static.serve', {'document_root': './statics/scripts'}),
     (r'^images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': './statics/images'}),
