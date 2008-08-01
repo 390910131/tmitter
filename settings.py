@@ -89,11 +89,11 @@ INSTALLED_APPS = (
 
 
 
-# Custom configures
+# 网站信息设置
 APP_DOMAIN = 'http://127.0.0.1:8000/'
 APP_NAME = 'Tmitter'
-APP_VERSION = '0.2.2'
-APP_COMPANY = 'Wathon Team'
+APP_VERSION = '0.2.3'
+APP_COMPANY = 'Thewolfs Team'
 APP_LICENSE = 'GNU General Public License v2'
 
 # 全局分页的每页条数
@@ -102,7 +102,7 @@ PAGE_SIZE = 4
 # Feed 相关的设置
 FEED_ITEM_MAX = 20
 
-# Email server configures
+# Email 服务器设置
 EMAIL_HOST = 'smtp.foxmail.com'
 EMAIL_HOST_PASSWORD = '123123'
 EMAIL_HOST_USER = 'huacnlee@foxmail.com'
