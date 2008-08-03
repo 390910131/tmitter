@@ -20,7 +20,6 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id','name')
     list_display_links = ('id','name')
     list_per_page = _list_per_page
-
     
 # User model
 class User(models.Model):
@@ -28,7 +27,7 @@ class User(models.Model):
 
     username = models.CharField('用户名',max_length = 20)
     password = models.CharField('密码',max_length = 32)    
-    realname = models.CharField('姓名',max_length = 20)    
+    realname = models.CharField('姓名',max_length = 20)
     email = models.EmailField('Email')    
     addtime = models.DateTimeField('注册时间',auto_now = True)
     
