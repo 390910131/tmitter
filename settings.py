@@ -24,6 +24,28 @@ DATABASE_PORT = ''             # Set to empty string for default. Not used with 
 # system time zone.
 TIME_ZONE = 'America/Chicago'
 
+
+# 网站信息设置
+APP_DOMAIN = 'http://127.0.0.1:8000/'
+APP_NAME = 'Tmitter'
+APP_VERSION = '0.2.3'
+APP_COMPANY = 'Thewolfs Team'
+APP_LICENSE = 'GNU General Public License v2'
+
+# 全局分页的每页条数
+PAGE_SIZE = 4
+# 管理后台列表每页条数
+ADMIN_PAGE_SIZE = 20
+
+# Feed 相关的设置
+FEED_ITEM_MAX = 20
+
+# Email 服务器设置
+EMAIL_HOST = 'smtp.foxmail.com'
+EMAIL_HOST_PASSWORD = '123123'
+EMAIL_HOST_USER = 'huacnlee@foxmail.com'
+EMAIL_SUBJECT_PREFIX = '[Tmitter]'
+
 # Language code for this installation. All choices can be found here:
 # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
 # http://blogs.law.harvard.edu/tech/stories/storyReader$15
@@ -40,11 +62,11 @@ USE_I18N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = ''
+MEDIA_ROOT =  './statics/uploads/'
 
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
-MEDIA_URL = ''
+MEDIA_URL = '/uploads/'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -89,21 +111,3 @@ INSTALLED_APPS = (
 
 
 
-# 网站信息设置
-APP_DOMAIN = 'http://127.0.0.1:8000/'
-APP_NAME = 'Tmitter'
-APP_VERSION = '0.2.3'
-APP_COMPANY = 'Thewolfs Team'
-APP_LICENSE = 'GNU General Public License v2'
-
-# 全局分页的每页条数
-PAGE_SIZE = 4
-
-# Feed 相关的设置
-FEED_ITEM_MAX = 20
-
-# Email 服务器设置
-EMAIL_HOST = 'smtp.foxmail.com'
-EMAIL_HOST_PASSWORD = '123123'
-EMAIL_HOST_USER = 'huacnlee@foxmail.com'
-EMAIL_SUBJECT_PREFIX = '[Tmitter]'

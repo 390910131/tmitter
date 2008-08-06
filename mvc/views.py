@@ -4,9 +4,9 @@ from django.template import Context, loader
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from tmitter.settings import *
-from tmitter.mvc.models import Note,User,Category
+from tmitter.mvc.models import Note,User,Category,Area
 from tmitter.mvc.feed import RSSRecentNotes,RSSUserRecentNotes
-from tmitter.utils import mailer,formatter
+from tmitter.utils import mailer,formatter,function
 
 # #################
 # common functions
@@ -49,7 +49,7 @@ def __check_login(_username,_password):
         _user = User.objects.get(username = _username)
         
         # to decide password 
-        if(_user.password == _password):
+        if(_user.password == function.md5_encode(_password)):
             _state['success']  = True
             _state['userid'] = _user.id
             _state['realname'] = _user.realname
@@ -110,9 +110,7 @@ def __do_signup(request,_userinfo):
     if(__check_username_exist(_userinfo['username'])):
         _state['success'] = False
         _state['message'] = '用户名已存在.'
-        return _state
-
-    
+        return _state    
 
     # check password & confirm password
     if(_userinfo['password'] != _userinfo['confirm']):
@@ -120,14 +118,14 @@ def __do_signup(request,_userinfo):
         _state['message'] = '确认密码不正确.'
         return _state
 
-    _user = User(username = _userinfo['username'],realname = _userinfo['realname'] , password = _userinfo['password'],email = _userinfo['email'])
-    try:
-        _user.save()
-        _state['success'] = True
-        _state['message'] = '注册成功.'
-    except:
-        _state['success'] = False
-        _state['message'] = '程序异常,注册失败.'
+    _user = User(username = _userinfo['username'],realname = _userinfo['realname'] , password = _userinfo['password'],email = _userinfo['email'], area = Area.objects.get(id=1))
+    #try:
+    _user.save()
+    _state['success'] = True
+    _state['message'] = '注册成功.'
+    #except:
+        #_state['success'] = False
+        #_state['message'] = '程序异常,注册失败.'
     
     # send regist success mail
     mailer.send_regist_success_mail(_userinfo)
@@ -382,3 +380,34 @@ def signout(request):
     request.session['username'] = ''
     
     return HttpResponseRedirect('/')
+
+def settings(request):
+     # check is login
+    _islogin = __is_login(request)
+    
+    if(not _islogin):
+        return HttpResponseRedirect('/signin/')
+    
+    _user_id = __user_id(request)
+    try:
+        _user = User.objects.get(id=_user_id)
+    except:
+        return HttpResponseRedirect('/signin/')
+    
+    # body content
+    _template = loader.get_template('settings.html')
+    _context = Context({
+        'page_title' : u'个人设置',
+        'islogin' : _islogin,
+        'user' : _user,
+        })
+    _output = _template.render(_context)  
+    return HttpResponse(_output)
+    
+    
+    
+    
+    
+
+
+    
