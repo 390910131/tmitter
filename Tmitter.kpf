@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Komodo Project File - DO NOT EDIT -->
 <project id="f37b1a83-83a0-43b6-89d8-8220c817d8db" kpf_version="4" name="Tmitter.kpf">
-<livefolder id="f37b1a83-83a0-43b6-89d8-8220c817d8db/mvc/templatetags" idref="f37b1a83-83a0-43b6-89d8-8220c817d8db/mvc" name="templatetags" url="templatetags">
-</livefolder>
 <preference-set idref="f37b1a83-83a0-43b6-89d8-8220c817d8db">
   <boolean id="import_live">1</boolean>
 </preference-set>
