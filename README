@@ -7,8 +7,9 @@ Tmitter 是一个模仿 twitter.com 的迷你博客程序，它可以是更加�
 开发工具：
    1. Python 2.5.2
    2. Django 0.96.1
-   3. MySQL 5.0
-   4. Komodo IDE 4.3 本项目用些 Komodo 创建的项目，用它可以直接打开源代码目录里面的 Tmitter.kpf
+   3. MySQL 5.0 
+   4. PIL 1.1.6 <www.pythonware.com/products/pil/>
+   5. Komodo IDE 4.3 本项目用些 Komodo 创建的项目，用它可以直接打开源代码目录里面的 Tmitter.kpf
 
 项目地址：
    http://code.google.com/p/tmitter/
