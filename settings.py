@@ -28,7 +28,7 @@ TIME_ZONE = 'America/Chicago'
 # 网站信息设置
 APP_DOMAIN = 'http://127.0.0.1:8000/'
 APP_NAME = 'Tmitter'
-APP_VERSION = '0.2.3'
+APP_VERSION = '0.2.4'
 APP_COMPANY = 'Thewolfs Team'
 APP_LICENSE = 'GNU General Public License v2'
 
@@ -67,6 +67,9 @@ MEDIA_ROOT =  './statics/uploads/'
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
 MEDIA_URL = '/uploads/'
+
+# Default user face
+DEFAULT_FACE = '/images/face%d.png'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.

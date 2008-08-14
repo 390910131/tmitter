@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from tmitter.settings import *
 from tmitter.mvc.models import Note,User,Category,Area
 from tmitter.mvc.feed import RSSRecentNotes,RSSUserRecentNotes
-from tmitter.utils import mailer,formatter,function
+from tmitter.utils import mailer,formatter,function,uploader
 
 # #################
 # common functions
@@ -131,7 +131,7 @@ def __do_signup(request,_userinfo):
     mailer.send_regist_success_mail(_userinfo)
 
     return _state
-
+    
 
 # response result message page
 def __result_message(request,_title=u'消息',_message='',_go_back_url=''):
@@ -394,10 +394,48 @@ def settings(request):
     except:
         return HttpResponseRedirect('/signin/')
     
+    if request.method == "POST":
+        # get post params
+        _userinfo = {
+            'realname' : request.POST['realname'],         
+            'url' : request.POST['url'],
+            'email' : request.POST['email'],
+            'face' : request.FILES.get('face',None),
+            "about" : request.POST['about'],
+        }
+        _is_post = True
+    else:     
+        _is_post = False
+    
+    _state = {
+        'message' : ''
+    }
+    
+    # save user info
+    if _is_post:       
+        _user.realname = _userinfo['realname']
+        _user.url = _userinfo['url']
+        _user.email = _userinfo['email']
+        _user.about = _userinfo['about']
+        _file_obj = _userinfo['face']
+        # try:
+        if _file_obj:
+            _upload_state = uploader.upload_face(_file_obj)
+            if _upload_state['success']:
+                _user.face = _upload_state['message']
+            else:
+                return __result_message(request,u'错误',_upload_state['message'])
+            
+        _user.save(False)
+        _state['message'] = '保存成功'
+        # except:
+            # return __result_message(request,u'错误','提交数据时出现异常，保存失败。')
+    
     # body content
     _template = loader.get_template('settings.html')
     _context = Context({
         'page_title' : u'个人设置',
+        'state' : _state,
         'islogin' : _islogin,
         'user' : _user,
         })

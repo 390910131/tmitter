@@ -1,22 +1,32 @@
 {% extends "base.html" %}
+{% load user_tags %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block main %}
 <div class="list">
     <ol>
-    <li>
-        <p class="message">
-            <a href="{% url mvc.views.index_user item.user.username %}" class="name">{{ item.user.realname }}</a>
-            {{ item.message|urlize }}
-        <p>
-        <p class="info">
-            <span class="date">{{ item.addtime|timesince }}前</span>
-            <span class="category">通过{{ item.category.name }}</span>
-            {% if islogin %}
-            {% ifequal userid item.user.id %}
-            <span class="delete"><a href="{% url mvc.views.detail_delete item.id %}">删除</a></span>
-            {% endifequal  %}
-            {% endif %}
-        </p>            
+    <li class="detail">
+        <div class="face">
+            <p>
+                <a href="{% url mvc.views.index_user item.user.username %}">
+                <img src="{{ item.user.face|face32 }}" class="face32" />
+                </a>
+            </p>
+            <p class="name">
+                <a href="{% url mvc.views.index_user item.user.username %}" class="name">{{ item.user.realname }}</a>
+            </p>
+        </div>
+        <div class="right">
+            <p class="message">{{ item.message|urlize }}</p>
+            <div class="info">
+                <span class="date">{{ item.addtime|timesince }}前</span>
+                <span class="category">通过{{ item.category.name }}</span>
+                {% if islogin %}
+                {% ifequal userid item.user.id %}
+                <span class="delete"><a href="{% url mvc.views.detail_delete item.id %}">删除</a></span>
+                {% endifequal  %}
+                {% endif %}
+            </div>
+        <div>             
     </li>
     </ol>
 </div>

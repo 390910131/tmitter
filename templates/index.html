@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load user_tags %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block head_link %}
 {% if user %}
@@ -8,29 +9,42 @@
 {% endif %}
 {% endblock %}
 {% block  main %}
+    {% if user %}        
+        <div class="userinfo">
+            <div class="face">
+                <img src="{{ user.face|face }}" class="face75" />
+            </div>
+            <ul class="right">
+                <li>姓名：{{ user.realname }}</li>
+                <li>主页：<a href="{{ user.url }}" target="_blank" title="点击新窗口中打开地址">进入</a></li>
+                <li>{{ user.about }}</li>
+            </ul>
+        </div>
+    {% endif %}
     {% if islogin %}
-    <div id="post-message" class="form">
-        <form method="post" action="/">                
-            <table cellpadding="0" cellspacing="0">
-                <tr>
-                    <td>我在做什么？</td>
-                    <td class="word-count">可以输入 <span id="word-count">140</span> 个字</td>
-                </tr>
-            </table>
-            <div class="input">
-                <textarea name="message" class="text" rows="4"></textarea>
-            </div>
-            <div class="buttons">
-                <button type="submit" class="submit wide">发送</button>
-            </div>
-        </form>
-    </div>
+        <div id="post-message" class="form">
+            <form method="post" action="/">                
+                <table cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>我在做什么？</td>
+                        <td class="word-count">可以输入 <span id="word-count">140</span> 个字</td>
+                    </tr>
+                </table>
+                <div class="input">
+                    <textarea name="message" class="text" rows="4"></textarea>
+                </div>
+                <div class="buttons">
+                    <button type="submit" class="submit wide">发送</button>
+                </div>
+            </form>
+        </div>
     {% endif %}
     <div class="list">
         <ol>
         {% for item in notes %}
         <li>
             <p class="message">
+                <span class="face"><img src="{{ item.user.face|face16 }}" class="face16" /></span>
                 <a href="{% url mvc.views.index_user item.user.username %}" class="name">{{ item.user.realname }}</a>
                 {{ item.message|urlize }} <a class="more" href="{% url mvc.views.detail item.id %}">详细...</a>
             <p>
@@ -46,6 +60,15 @@
         </li>
         {% endfor %}
         </ol>
-        <div class="pagebar">{{ page_bar|safe }}</div>
+        <div class="pagebar">
+            {{ page_bar|safe }}
+            {% if user %}
+                <a href="/user/feed/rss/recent/{{ user.username }}" alt="定阅">
+            {% else %}
+                 <a href="/feed/rss/recent/" alt="定阅">
+            {% endif %}
+           <img src="/images/feed.png" style="border:0;margin-bottom:-2px;" alt="feed icon" />
+           </a>
+        </div>
     </div>
 {% endblock %}

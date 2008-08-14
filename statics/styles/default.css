@@ -13,15 +13,15 @@ body { background:#234F32; overflow:hidden; font-size:12px; line-height:150%; te
 #nav a:link,#nav a:visited { color:#132B1B; }
 #nav span{}
 
-#footer {margin:5px; font-size:11px; color:#234F32; text-align:center; border-top:1px solid #89C342; line-height:24px; background:#A1CF69; }
+#footer {margin:5px; font-size:11px; color:#234F32; text-align:center; border-top:1px solid #89C342; line-height:24px; background:#A1CF69; clear:both; }
 #footer a { color:#234F32;}
 
 #main { padding:10px;}
 #main a:link,#main a:visited{ color:#008881;}
 #main h5 { font-size:12px; font-weight:bold;}
-#main .list { margin:0; }
+#main .list { margin:0;}
 #main .list ol { list-style:none; list-style-position:outside;}
-#main .list ol li { padding:5px 0; border-bottom:1px solid #DDD; color:#444; }
+#main .list ol li { padding:5px 0; border-bottom:1px solid #DDD; color:#444; clear:both; }
 #main .list ol li .message { }
 #main .list ol li .message .more {margin-left:2px;}
 #main .list ol li .info {display:block; text-align:right;color:#999;}
@@ -30,6 +30,13 @@ body { background:#234F32; overflow:hidden; font-size:12px; line-height:150%; te
 #main .list ol li .date { color:#999;}
 #main .list .pagebar { margin:3px 0; text-align:right;}
 #main .list .pagebar span { margin-left:2px;}
+#main .list .detail { clear:both;}
+#main .list .detail .face { width:35px; overflow:hidden; height:50px;}
+#main .list .detail .face p.name { line-height:24px; text-align:center;}
+#main .list .detail .right { margin-left:38px; width:160px; margin-top:-52px;}
+#main .userinfo { padding-bottom:5px; border-bottom:1px solid #DDD; margin-bottom:5px; height:78px;}
+#main .userinfo .face { width:75px;}
+#main .userinfo .right { margin-left:78px; width:120px; margin-top:-78px; list-style:none; }
 
 .form { margin:0px;}
 .form table {width:100%; }
@@ -43,3 +50,8 @@ body { background:#234F32; overflow:hidden; font-size:12px; line-height:150%; te
 #post-message .input { padding-bottom:3px; }
 #post-message .input textarea { width:195px; overflow:hidden;}
 #post-message .buttons { text-align:left;}
+
+.face16 { width:16px; height:16px; border:none; margin:1px; display:inline-block; margin-bottom:-3px;}
+.face24 { width:24px; height:24px; border:none; margin:1px; display:inline-block; margin-bottom:-10px;}
+.face32 { width:32px; height:32px; border:none; margin:1px; display:inline-block; margin-bottom:-10px;}
+.face75 { width:75px; height:75px; border:none;}

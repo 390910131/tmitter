@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from tmitter.mvc.models import Note,User
 from tmitter.utils import formatter
 from tmitter.settings import *
+from tmitter.mvc.templatetags import user_tags
 
 _global_title_template = 'feed/title.html'
 _global_description_template = 'feed/description.html'
@@ -24,7 +25,7 @@ class RSSRecentNotes(Feed):
         return item.user.realname
     
     def item_author_link(self, item):
-        return item.user.get_user_url()
+        return user_tags.user_url(item.user.username)
     
     def item_link(self, item):
         return item.get_absolute_url()
@@ -63,7 +64,7 @@ class RSSUserRecentNotes(Feed):
         return item.user.realname
     
     def item_author_link(self, item):
-        return item.user.get_user_url()
+        return user_tags.user_url(item.user.username)
     
     def item_link(self, item):
         return item.get_absolute_url()

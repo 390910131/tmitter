@@ -6,7 +6,10 @@ from tmitter.settings import *
 register = Library()
 
 def get_face_url(size,content):
-    return MEDIA_URL + '%s/' % size + content
+    if content:
+        return MEDIA_URL + 'face/%d/%s' % (size, content)
+    else:
+        return DEFAULT_FACE % (size)
 
 def face16(content):
     return get_face_url(16,content)
@@ -18,7 +21,7 @@ def face32(content):
     return get_face_url(32,content)
 
 def face(content):
-    return get_face_url(64,content)
+    return get_face_url(75,content)
 
 register.filter('face', face)
 register.filter('face16', face16)

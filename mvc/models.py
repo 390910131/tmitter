@@ -5,6 +5,8 @@ from django.contrib import admin
 from django.utils import timesince,html
 from tmitter.utils import formatter,function
 from tmitter.settings import *
+import PIL
+from StringIO import StringIO
 
 # category model
 class Category(models.Model):
@@ -56,9 +58,9 @@ class User(models.Model):
     realname = models.CharField('姓名',max_length = 20)
     email = models.EmailField('Email')
     area = models.ForeignKey(Area,verbose_name='地区')
-    face = models.FileField('头像',upload_to=MEDIA_ROOT,default='')
-    url = models.CharField('个人主页',max_length=200,default='')
-    about = models.TextField('关于我',max_length = 1000,default='')
+    face = models.ImageField('头像',upload_to='face/%Y/%m/%d',default='',blank=True)
+    url = models.CharField('个人主页',max_length=200,default='',blank=True)
+    about = models.TextField('关于我',max_length = 1000,default='',blank=True)
     addtime = models.DateTimeField('注册时间',auto_now = True)
     
     def __unicode__(self):
@@ -66,9 +68,11 @@ class User(models.Model):
     
     def addtime_format(self):
         return self.addtime.strftime('%Y-%m-%d %H:%M:%S')
-    
-    def save(self):
-        self.password = function.md5_encode(self.password)
+       
+    def save(self,modify_pwd=True):
+        if modify_pwd:
+            self.password = function.md5_encode(self.password)
+        self.about = formatter.substr(self.about,20,True)
         super(User,self).save()
         
     class Meta:
