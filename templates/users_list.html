@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load user_tags %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block head_link %}
+{% endblock %}
+{% block  main %}    
+    <div class="list">
+        <ol>
+        {% for user in users %}
+        <li>
+            <div class="userinfo">
+                <div class="face">
+                    <a href="{% url tmitter.mvc.views.index_user user.username%}">
+                    <img src="{{ user.face|face }}" class="face75" />
+                    </a>
+                </div>
+                <ul class="right">
+                    <li>姓名：{{ user.realname }}</li>
+                    <li>主页：<a href="{{ user.url }}" target="_blank" title="点击新窗口中打开地址">进入</a></li>
+                    <li>{{ user.about }}</li>
+                </ul>
+            </div>          
+        </li>
+        {% endfor %}
+        </ol>
+        <div class="pagebar">
+            {{ page_bar|safe }}            
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% spaceless %}
+    <span class="first">
+    {% ifequal page_index 1 %}
+        首页
+    {% else %}
+        <a href="{% url tmitter.mvc.views.users_list page_index %}">首页</a>
+    {% endifequal %}
+    </span>
+    <span class="prev">
+    {% if has_prev %}
+        <a href="{% url tmitter.mvc.views.users_list page_prev %}">上一页</a>
+    {% else %}
+        上一页
+    {% endif %}
+    </span>
+    <span class="page">{{ page_index }}/{{ page_count }}</span>
+    <span class="next">
+    {% if has_next %}
+        <a href="{% url tmitter.mvc.views.users_list page_next %}">下一页</a>
+    {% else %}
+        下一页
+    {% endif %}
+    </span>
+    <span class="last">
+    {% ifequal page_index page_count %}
+        尾页
+    {% else %}
+        <a href="{% url tmitter.mvc.views.users_list page_count %}">尾页</a>
+    {% endifequal %}
+    </span><br />
+    <span class="tip">共{{ row_count }}个网友</span>
+{% endspaceless %}

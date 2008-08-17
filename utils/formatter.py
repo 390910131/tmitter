@@ -44,10 +44,15 @@ def substr(content, length,add_dot=True):
             content = content[:len(content)-3] + '...'
     return content
 
-def pagebar(objects,page_index,username,tempate='control/home_pagebar.html'):
+def pagebar(objects,page_index,username='',tempate='control/home_pagebar.html'):
     u"""
     summary:
         生成HTML分页控件,要使用tempate
+    params:
+        objects     数据列表
+        page_index  当前页数
+        username    目前被访问的空间的用户名，没有传空
+        template    分页模板
     author:
         Jason Lee <huacnlee@gmail.com>
     """

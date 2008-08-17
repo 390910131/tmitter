@@ -382,7 +382,7 @@ def signout(request):
     return HttpResponseRedirect('/')
 
 def settings(request):
-     # check is login
+    # check is login
     _islogin = __is_login(request)
     
     if(not _islogin):
@@ -442,7 +442,43 @@ def settings(request):
     _output = _template.render(_context)  
     return HttpResponse(_output)
     
+# all users list
+def users_index(request):
+    return users_list(request,1)
     
+# all users list
+def users_list(request,_page_index=1):
+    
+    # check is login
+    _islogin = __is_login(request)
+
+    _page_title = '网友们'
+    _users = User.objects.order_by('-addtime')
+
+    # page bar
+    _page_bar = formatter.pagebar(_users,_page_index,'','control/userslist_pagebar.html')
+    
+    # get message list
+    _offset_index = (int(_page_index) - 1) * PAGE_SIZE
+    _last_item_index = PAGE_SIZE * int(_page_index)
+
+    # get current page
+    _users = _users[_offset_index:_last_item_index]
+    
+    # body content
+    _template = loader.get_template('users_list.html')
+
+    _context = Context({
+        'page_title' : _page_title,
+        'users' : _users,
+        'islogin' : _islogin,
+        'userid' : __user_id(request),
+        'page_bar' : _page_bar,
+        })
+    
+    _output = _template.render(_context)    
+    
+    return HttpResponse(_output)
     
     
     
