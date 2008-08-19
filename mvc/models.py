@@ -62,6 +62,7 @@ class User(models.Model):
     url = models.CharField('个人主页',max_length=200,default='',blank=True)
     about = models.TextField('关于我',max_length = 1000,default='',blank=True)
     addtime = models.DateTimeField('注册时间',auto_now = True)
+    friend = models.ManyToManyField("self",verbose_name='朋友')
     
     def __unicode__(self):
         return self.realname
@@ -78,6 +79,7 @@ class User(models.Model):
     class Meta:
         verbose_name = u'用户'
         verbose_name_plural = u'用户'
+
     
 class UserAdmin(admin.ModelAdmin):       
     list_display = ('id','username','realname','email','addtime_format')
