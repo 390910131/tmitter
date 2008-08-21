@@ -37,6 +37,9 @@ PAGE_SIZE = 4
 # 管理后台列表每页条数
 ADMIN_PAGE_SIZE = 20
 
+# 网友空间的好友列表个数限制
+FRIEND_LIST_MAX = 10
+
 # Feed 相关的设置
 FEED_ITEM_MAX = 20
 

@@ -3,6 +3,7 @@ from django.http import HttpResponse,Http404, HttpResponseRedirect, HttpResponse
 from django.template import Context, loader
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
+from django.core import serializers
 from tmitter.settings import *
 from tmitter.mvc.models import Note,User,Category,Area
 from tmitter.mvc.feed import RSSRecentNotes,RSSUserRecentNotes
@@ -134,7 +135,9 @@ def __do_signup(request,_userinfo):
     
 
 # response result message page
-def __result_message(request,_title=u'消息',_message='',_go_back_url=''):
+def __result_message(request,_title=u'消息',_message='程序异常，操作未成功。',_go_back_url=''):
+    _islogin = __is_login(request)
+    
     # body content
     _template = loader.get_template('result_message.html')
     
@@ -142,12 +145,12 @@ def __result_message(request,_title=u'消息',_message='',_go_back_url=''):
         'page_title' : _title,
         'message' : _message,
         'go_back_url' : _go_back_url,
+        'islogin' : _islogin
     })
     
     _output = _template.render(_context)
     
     return HttpResponse(_output)
-    
     
 
 # #################
@@ -192,13 +195,16 @@ def index_user_page(request,_username,_page_index):
             return HttpResponseRedirect('/signin/')
         
         # save messages
-        _category = Category.objects.get(id = 1)
+        (_category,_is_added_cate) = Category.objects.get_or_create(name=u'网页')
+
         try:
             _user = User.objects.get(id = __user_id(request))
         except:
-            return HttpResponseRedirect('/signin/')        
+            return HttpResponseRedirect('/signin/')
+        
         _note = Note(message = _message,category = _category , user = _user)
         _note.save()
+        
         return HttpResponseRedirect('/user/' + _user.username)
           
     _userid = -1
@@ -206,12 +212,15 @@ def index_user_page(request,_username,_page_index):
     _offset_index = (int(_page_index) - 1) * PAGE_SIZE
     _last_item_index = PAGE_SIZE * int(_page_index)
 
+    _friends = None
     if _username != '':
         # there is get user's messages
         _user = get_object_or_404(User,username=_username)
         _userid = _user.id
         _notes = Note.objects.filter(user = _user).order_by('-addtime')
         _page_title = u'%s' % _user.realname
+        # get friend list
+        _friends = _user.friend.get_query_set().order_by("id")[0:FRIEND_LIST_MAX]
     else:
         # get all messages
         _user = None
@@ -233,6 +242,7 @@ def index_user_page(request,_username,_page_index):
         'userid' : __user_id(request),
         'user' : _user,
         'page_bar' : _page_bar,
+        'friends' : _friends,
         })
     
     _output = _template.render(_context)    
@@ -479,9 +489,66 @@ def users_list(request,_page_index=1):
     _output = _template.render(_context)    
     
     return HttpResponse(_output)
+
+# add friend
+def friend_add(request,_username):
     
+    # check is login
+    _islogin = __is_login(request)
     
+    if(not _islogin):
+        return HttpResponseRedirect('/signin/')
+    
+    _state = {
+        "success" : False,
+        "message" : "",
+    }
+    
+    _user_id = __user_id(request)
+    try:
+        _user = User.objects.get(id=_user_id)
+    except:
+        return __result_message(request,u'对不起', u'你想添加这个人不存在。')
+           
+    # check friend exist
+    try:
+        _friend = User.objects.get(username=_username)
+        _user.friend.add(_friend)
+        return __result_message(request,u'成功', u'好友添加成功，%s 已成为了你的好友。' % _friend.realname)
+    except:
+        return __result_message(request,u'错误', u'你想添加这个人不存在。')
     
 
-
+def api_note_add(request):
+    """
+    summary:
+        api interface post message
+    params:
+        GET['uname'] Tmitter user's username
+        GET['pwd'] user's password not encoding
+        GET['msg'] message want to post
+        GET['from'] your web site name
+    author:
+        Jason Lee
+    """
+    # get querystring params
+    _username = request.GET['uname']    
+    _password = function.md5_encode(request.GET['pwd'])
+    _message = request.GET['msg']
+    _from = request.GET['from']
     
+    # Get user info and check user
+    try:
+        _user = User.objects.get(username=_username,password=_password)        
+    except:
+        return HttpResponse("-2")
+    
+    # Get category info ,If it not exist create new
+    (_cate,_is_added_cate) = Category.objects.get_or_create(name=_from)
+    
+    try:
+        _note = Note(message=_message,user=_user,category=_cate)
+        _note.save()
+        return HttpResponse("1")
+    except:
+        return HttpResponse("-1")

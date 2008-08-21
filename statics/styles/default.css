@@ -39,6 +39,12 @@ body { background:#234F32; overflow:hidden; font-size:12px; line-height:150%; te
 #main .userinfo .face { width:75px;}
 #main .userinfo .right { margin-left:78px; width:120px; margin-top:-78px; list-style:none; }
 #main .userinfo .right li { line-height:normal; border:none; padding:0;}
+#main .userinfo .right li span {margin-right:2px;}
+#main .friends { margin-top:8px;}
+#main .friends h3 { font-size:12px;border-bottom:1px solid #ddd; line-height:20px; margin-bottom:4px; color:#666; }
+#main .friends .list { text-align:left;}
+#main .friends .list a { margin:0 1px;}
+
 
 .form { margin:0px;}
 .form table {width:100%; }

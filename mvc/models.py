@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import time
-from django.db import models
+from django.db import models,connection
 from django.contrib import admin
 from django.utils import timesince,html
 from tmitter.utils import formatter,function
@@ -15,14 +15,20 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
     
+    def save(self):
+        self.name = self.name[0:20]
+        return super(Category,self).save()        
+    
     class Meta:
         verbose_name = '分类'
         verbose_name_plural ='分类'
+        
     
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id','name')
     list_display_links = ('id','name')
     list_per_page = ADMIN_PAGE_SIZE
+    
     
 # Area Model
 class Area(models.Model):

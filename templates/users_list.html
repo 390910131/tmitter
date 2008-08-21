@@ -9,16 +9,7 @@
         {% for user in users %}
         <li>
             <div class="userinfo">
-                <div class="face">
-                    <a href="{% url tmitter.mvc.views.index_user user.username%}">
-                    <img src="{{ user.face|face }}" class="face75" />
-                    </a>
-                </div>
-                <ul class="right">
-                    <li>姓名：{{ user.realname }}</li>
-                    <li>主页：<a href="{{ user.url }}" target="_blank" title="点击新窗口中打开地址">进入</a></li>
-                    <li>{{ user.about }}</li>
-                </ul>
+                {% include 'include/userinfo.html'%}  
             </div>          
         </li>
         {% endfor %}
