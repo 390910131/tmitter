@@ -28,7 +28,7 @@ TIME_ZONE = 'America/Chicago'
 # 网站信息设置
 APP_DOMAIN = 'http://127.0.0.1:8000/'
 APP_NAME = 'Tmitter'
-APP_VERSION = '0.2.5'
+APP_VERSION = '0.2.8'
 APP_COMPANY = 'Thewolfs Team'
 APP_LICENSE = 'GNU General Public License v2'
 
