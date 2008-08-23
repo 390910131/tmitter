@@ -79,6 +79,8 @@ DEFAULT_FACE = '/images/face%d.png'
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '/media/'
 
+CACHE_BACKEND = 'locmem:///'
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '&a*2eokltx!i@0ohfk=gp(98z^8po#poq2g8r__d2b)-^gvmn0'
 
@@ -94,6 +96,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
 )
 
 ROOT_URLCONF = 'tmitter.urls'
