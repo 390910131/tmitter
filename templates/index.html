@@ -13,9 +13,13 @@
         <div class="userinfo">
             {% include 'include/userinfo.html' %}
         </div>
+    {% else %}
+    {% include 'include/postform.html' %}
     {% endif %}
     {% if islogin %}
-        {% include 'include/postform.html' %}
+        {% if self_home %}
+            {% include 'include/postform.html' %}
+        {% endif %}
     {% endif %}
     <div class="list">
         <ol>

@@ -36,7 +36,7 @@ def __user_name(request):
 # return user login status
 def __is_login(request):
      return request.session.get('islogin', False)
-
+    
 # check username and password
 def __check_login(_username,_password):
     _state = {
@@ -62,8 +62,8 @@ def __check_login(_username,_password):
         # user not exist
         _state['success'] = False
         _state['message'] = '用户不存在.'
-
-    
+        
+                            
     return _state
 
 # check user was existed
@@ -119,7 +119,13 @@ def __do_signup(request,_userinfo):
         _state['message'] = '确认密码不正确.'
         return _state
 
-    _user = User(username = _userinfo['username'],realname = _userinfo['realname'] , password = _userinfo['password'],email = _userinfo['email'], area = Area.objects.get(id=1))
+    _user = User(
+                     username = _userinfo['username'],
+                     realname = _userinfo['realname'] , 
+                     password = _userinfo['password'],
+                     email = _userinfo['email'], 
+                     area = Area.objects.get(id=1)
+                 )
     #try:
     _user.save()
     _state['success'] = True
@@ -213,6 +219,7 @@ def index_user_page(request,_username,_page_index):
     _last_item_index = PAGE_SIZE * int(_page_index)
 
     _friends = None
+    _self_home = False
     if _username != '':
         # there is get user's messages
         _user = get_object_or_404(User,username=_username)
@@ -221,10 +228,23 @@ def index_user_page(request,_username,_page_index):
         _page_title = u'%s' % _user.realname
         # get friend list
         _friends = _user.friend.get_query_set().order_by("id")[0:FRIEND_LIST_MAX]
+        
+        if(_userid == __user_id(request)):
+            _self_home = True
+            
     else:
         # get all messages
         _user = None
-        _notes = Note.objects.order_by('-addtime')
+        
+        if _islogin:
+            # get friend messages if user is logined
+            _login_user = User.objects.get(username = __user_name(request))
+            _query_users = [_login_user]
+            _query_users.extend(_login_user.friend.all())
+            _notes = Note.objects.filter(user__in = _query_users).order_by('-addtime')            
+        else:
+            # get all user message
+            _notes = Note.objects.order_by('-addtime')
 
     # page bar
     _page_bar = formatter.pagebar(_notes,_page_index,_username)
@@ -240,12 +260,13 @@ def index_user_page(request,_username,_page_index):
         'notes' : _notes,
         'islogin' : _islogin,
         'userid' : __user_id(request),
+        'self_home' : _self_home,
         'user' : _user,
         'page_bar' : _page_bar,
         'friends' : _friends,
         })
     
-    _output = _template.render(_context)    
+    _output = _template.render(_context)
     
     return HttpResponse(_output)
 
