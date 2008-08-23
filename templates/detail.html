@@ -18,7 +18,7 @@
         <div class="right">
             <p class="message">{{ item.message|urlize }}</p>
             <div class="info">
-                <span class="date">{{ item.addtime|timesince }}前</span>
+                <span class="date">{{ item.addtime|timesince }}前</span><br />
                 <span class="category">通过{{ item.category.name }}</span>
                 {% if islogin %}
                 {% ifequal userid item.user.id %}
