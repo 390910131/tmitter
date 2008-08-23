@@ -6,9 +6,7 @@
     <li>姓名：{{ user.realname }}</li>
     <li>
         <span><a href="{{ user.url }}" target="_blank" title="点击新窗口中打开地址">个人主页</a></span>
-        {% if islogin %}
         <span><a href="{% url tmitter.mvc.views.friend_add user.username %}" title="将{{ user.realname }}加为好友">加为好友</a></span>
-        {% endif %}
     </li>
     <li>{{ user.about }}</li>
 </ul>
