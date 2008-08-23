@@ -486,6 +486,13 @@ def users_list(request,_page_index=1):
     _page_title = '网友们'
     _users = User.objects.order_by('-addtime')
 
+    _login_user = None
+    if _islogin:
+        try:
+            _login_user = User.objects.get(id=__user_id(request))
+        except:
+            _login_user = None
+    
     # page bar
     _page_bar = formatter.pagebar(_users,_page_index,'','control/userslist_pagebar.html')
     
@@ -502,6 +509,7 @@ def users_list(request,_page_index=1):
     _context = Context({
         'page_title' : _page_title,
         'users' : _users,
+        'login_user_friend_list' : _login_user.friend.all(),
         'islogin' : _islogin,
         'userid' : __user_id(request),
         'page_bar' : _page_bar,
