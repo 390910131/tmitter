@@ -32,9 +32,9 @@ body { background:#234F32; overflow:hidden; font-size:12px; line-height:150%; te
 #main .list .pagebar { margin:3px 0; text-align:right;}
 #main .list .pagebar span { margin-left:2px;}
 #main .list .detail { clear:both;}
-#main .list .detail .face { width:35px; overflow:hidden; height:50px;}
-#main .list .detail .face p.name { line-height:24px; text-align:center;}
-#main .list .detail .right { margin-left:38px; width:160px; margin-top:-52px;}
+#main .list .detail .face { width:45px; overflow:hidden;text-align:center; height:50px;}
+#main .list .detail .face p.name { line-height:24px; }
+#main .list .detail .right { margin-left:48px; width:150px; margin-top:-52px;}
 #main .userinfo { padding-bottom:5px; border-bottom:1px solid #DDD; margin-bottom:5px; height:78px;}
 #main .userinfo .face { width:75px;}
 #main .userinfo .right { margin-left:78px; width:120px; margin-top:-78px; list-style:none; }
