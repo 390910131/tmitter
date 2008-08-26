@@ -30,6 +30,7 @@ urlpatterns = patterns('',
     (r'^message/(?P<_id>\d+)/$','tmitter.mvc.views.detail'),
     (r'^message/(?P<_id>\d+)/delete/$','tmitter.mvc.views.detail_delete'),
     (r'^friend/add/(?P<_username>[a-zA-Z\-_\d]+)','tmitter.mvc.views.friend_add'),
+    (r'^friend/remove/(?P<_username>[a-zA-Z\-_\d]+)','tmitter.mvc.views.friend_remove'),
     (r'^api/note/add/','tmitter.mvc.views.api_note_add'),
     # Uncomment this for admin:
     (r'^admin/(.*)',admin.site.root),

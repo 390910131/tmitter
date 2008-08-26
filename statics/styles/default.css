@@ -10,7 +10,7 @@ body { background:#234F32; overflow:hidden; font-size:12px; line-height:150%; te
 #header h1 img{ border:0; margin-bottom:-2px; margin-right:2px;}
 #header h1 a {color:#FFFFFF; font-size:12px; font-weight:bolder; text-decoration:none; border:none; margin:0; padding:0;}
 #nav { list-style:none; font-size:12px;}
-#nav li { float:left; margin-right:8px;}
+#nav li { float:left; margin-right:4px;}
 #nav a:link,#nav a:visited { color:#132B1B; }
 #nav span{}
 

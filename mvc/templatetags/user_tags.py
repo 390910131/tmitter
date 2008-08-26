@@ -28,5 +28,7 @@ register.filter('face16', face16)
 register.filter('face24', face24)
 register.filter('face32', face32)
 
+
+
 def user_url(username):
     return '%suser/%s' % (APP_DOMAIN,username)

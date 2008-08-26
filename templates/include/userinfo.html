@@ -1,4 +1,5 @@
 {% load user_tags %}
+{% load common_tags %}
 <div class="face">
     <a href="{% url tmitter.mvc.views.index_user user.username %}"><img src="{{ user.face|face }}" class="face75" /></a>
 </div>
@@ -6,7 +7,13 @@
     <li>姓名：{{ user.realname }}</li>
     <li>
         <span><a href="{{ user.url }}" target="_blank" title="点击新窗口中打开地址">个人主页</a></span>
-        <span><a href="{% url tmitter.mvc.views.friend_add user.username %}" title="将{{ user.realname }}加为好友">加为好友</a></span>
+		{% if islogin %}
+			{% if user|in_list:login_user_friend_list %}
+	        <span><a href="{% url tmitter.mvc.views.friend_remove user.username %}" title="解除与{{ user.realname }}的好友关系">解除关系</a></span>
+			{% else %}
+			<span><a href="{% url tmitter.mvc.views.friend_add user.username %}" title="将{{ user.realname }}加为好友">加为好友</a></span>		
+			{% endif %}
+		{% endif %}
     </li>
     <li>{{ user.about }}</li>
 </ul>

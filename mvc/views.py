@@ -143,6 +143,9 @@ def __do_signup(request,_userinfo):
 # response result message page
 def __result_message(request,_title=u'消息',_message='程序异常，操作未成功。',_go_back_url=''):
     _islogin = __is_login(request)
+        
+    if _go_back_url == '':
+        _go_back_url = function.get_referer_url(request)
     
     # body content
     _template = loader.get_template('result_message.html')
@@ -218,27 +221,33 @@ def index_user_page(request,_username,_page_index):
     _offset_index = (int(_page_index) - 1) * PAGE_SIZE
     _last_item_index = PAGE_SIZE * int(_page_index)
 
-    _friends = None
+    _login_user_friend_list = None
+    if _islogin:
+         # get friend messages if user is logined
+        _login_user = User.objects.get(username = __user_name(request))
+        _login_user_friend_list = _login_user.friend.all()
+    else:
+        _login_user = None
+    
+    _friends = None    
     _self_home = False
     if _username != '':
         # there is get user's messages
         _user = get_object_or_404(User,username=_username)
-        _userid = _user.id
+        _userid = _user.id        
         _notes = Note.objects.filter(user = _user).order_by('-addtime')
         _page_title = u'%s' % _user.realname
         # get friend list
         _friends = _user.friend.get_query_set().order_by("id")[0:FRIEND_LIST_MAX]
         
         if(_userid == __user_id(request)):
-            _self_home = True
+            _self_home = True         
             
     else:
         # get all messages
         _user = None
         
-        if _islogin:
-            # get friend messages if user is logined
-            _login_user = User.objects.get(username = __user_name(request))
+        if _islogin:           
             _query_users = [_login_user]
             _query_users.extend(_login_user.friend.all())
             _notes = Note.objects.filter(user__in = _query_users).order_by('-addtime')            
@@ -264,6 +273,7 @@ def index_user_page(request,_username,_page_index):
         'user' : _user,
         'page_bar' : _page_bar,
         'friends' : _friends,
+        'login_user_friend_list' : _login_user_friend_list,
         })
     
     _output = _template.render(_context)
@@ -487,12 +497,14 @@ def users_list(request,_page_index=1):
     _users = User.objects.order_by('-addtime')
 
     _login_user = None
+    _login_user_friend_list = None
     if _islogin:
         try:
             _login_user = User.objects.get(id=__user_id(request))
+            _login_user_friend_list = _login_user.friend.all()
         except:
             _login_user = None
-    
+
     # page bar
     _page_bar = formatter.pagebar(_users,_page_index,'','control/userslist_pagebar.html')
     
@@ -509,7 +521,7 @@ def users_list(request,_page_index=1):
     _context = Context({
         'page_title' : _page_title,
         'users' : _users,
-        'login_user_friend_list' : _login_user.friend.all(),
+        'login_user_friend_list' : _login_user_friend_list,
         'islogin' : _islogin,
         'userid' : __user_id(request),
         'page_bar' : _page_bar,
@@ -547,6 +559,35 @@ def friend_add(request,_username):
     except:
         return __result_message(request,u'错误', u'你想添加这个人不存在。')
     
+def friend_remove(request,_username):
+    """
+    summary:
+        解除与某人的好友关系
+    """
+    # check is login
+    _islogin = __is_login(request)
+
+    if(not _islogin):
+        return HttpResponseRedirect('/signin/')
+    
+    _state = {
+        "success" : False,
+        "message" : "",
+    }
+    
+    _user_id = __user_id(request)
+    try:
+        _user = User.objects.get(id=_user_id)
+    except:
+        return __result_message(request,u'对不起', u'你想添加这个人不存在。')
+           
+    # check friend exist
+    try:
+        _friend = User.objects.get(username=_username)
+        _user.friend.remove(_friend)
+        return __result_message(request,u'成功', u'与，%s 的好友关系已经解除。' % _friend.realname)
+    except:
+        return __result_message(request,u'错误', u'好友关系不存在。')
 
 def api_note_add(request):
     """
