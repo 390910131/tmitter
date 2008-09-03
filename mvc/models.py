@@ -57,7 +57,7 @@ class AreaAdmin(admin.ModelAdmin):
     
 # User model
 class User(models.Model):
-    id = models.AutoField(primary_key = True,core = True)
+    id = models.AutoField(primary_key = True)
 
     username = models.CharField('用户名',max_length = 20)
     password = models.CharField('密码',max_length = 100)    
@@ -97,12 +97,12 @@ class UserAdmin(admin.ModelAdmin):
 class Note(models.Model):
     
     id = models.AutoField(
-        primary_key = True,core=True
+        primary_key = True
     )
-    message = models.TextField('消息',core=True)
-    addtime = models.DateTimeField('发布时间',auto_now = True,core=True)
-    category = models.ForeignKey(Category,core=True,verbose_name='来源')
-    user = models.ForeignKey(User,core = True,verbose_name='发布者')
+    message = models.TextField('消息')
+    addtime = models.DateTimeField('发布时间',auto_now = True)
+    category = models.ForeignKey(Category,verbose_name='来源')
+    user = models.ForeignKey(User,verbose_name='发布者')
     
     def __unicode__(self):
         return self.message
