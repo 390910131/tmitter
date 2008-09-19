@@ -1,10 +1,14 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block  main %}
 <div class="message">{{ message }}</div>
 {% if go_back_url %}
-<a href="{{ go_back_url }}">返回</a>
+<a href="{{ go_back_url }}">{% trans 'Go back' %}</a>
 {% else %}
-<a href="/">返回</a>
+<a href="/">{% trans 'Go back' %}</a>
 {% endif %}
 {% endblock %}

@@ -52,7 +52,7 @@ EMAIL_SUBJECT_PREFIX = '[Tmitter]'
 # Language code for this installation. All choices can be found here:
 # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
 # http://blogs.law.harvard.edu/tech/stories/storyReader$15
-LANGUAGE_CODE = 'zh-cn'
+LANGUAGE_CODE = 'en'
 
 DEFAULT_CHARSET = "utf-8"
 
@@ -62,6 +62,13 @@ SITE_ID = 1
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
+
+ugettext = lambda s: s
+LANGUAGES = (
+  ('zh-cn', u'简体中文'),
+  ('en', u'English'),
+)
+
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -93,11 +100,13 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'django.middleware.gzip.GZipMiddleware',
 )
+
 
 ROOT_URLCONF = 'tmitter.urls'
 

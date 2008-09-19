@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block main %}  
 <div class="form">
@@ -6,28 +10,28 @@
     <form action="/signup/" method="post">
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <td class="field">用户名：</td>
+                <td class="field">{% trans 'Username' %}:</td>
                 <td><input type="text" name="username" value="{{ state.form.username }}" class="text" size="12" /></td>
             </tr>
             <tr>
-                <td class="field">姓名：</td>
+                <td class="field">{% trans 'Name' %}:</td>
                 <td><input type="text" name="realname" class="text" value="{{ state.form.realname }}" size="5" /></td>
             </tr>
             <tr>
-                <td class="field">Email：</td>
+                <td class="field">{% trans 'Email' %}:</td>
                 <td><input type="text" name="email" class="text"  value="{{ state.form.email }}" size="15" /></td>
             </tr>
             <tr>
-                <td class="field">密码：</td>
+                <td class="field">{% trans 'Password' %}:</td>
                 <td><input type="password" name="password" class="text" size="15" /></td>
             </tr>
             <tr>
-                <td class="field">确认密码：</td>
+                <td class="field">{% trans 'Confirm' %}:</td>
                 <td><input type="password" name="confirm" class="text" size="15" /></td>
             </tr>
             <tr>
                 <td class="field"></td>
-                <td><button type="submit" class="submit">注册</button></td>
+                <td><button type="submit" class="submit">{% trans 'Submit' %}</button></td>
             </tr>
         </table>
     </form>

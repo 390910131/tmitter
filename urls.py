@@ -40,5 +40,6 @@ urlpatterns = patterns('',
     (r'^scripts/(?P<path>.*)$', 'django.views.static.serve', {'document_root': './statics/scripts'}),
     (r'^images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': './statics/images'}),
     (r'^uploads/(?P<path>.*)$', 'django.views.static.serve', {'document_root': './statics/uploads'}),
+    (r'^i18n/', include('django.conf.urls.i18n')),
 
 )

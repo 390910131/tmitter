@@ -1,0 +1,329 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Tmitter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-09-20 01:22+0800\n"
+"PO-Revision-Date: 2008-09-20 01:18+0800\n"
+"Last-Translator: Jason Lee <huacnlee@gmail.com>\n"
+"Language-Team: Thewolfs Lab. <huacnlee@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+
+#: .\mvc\views.py:61
+msgid "Password incorrect."
+msgstr ""
+
+#: .\mvc\views.py:65
+msgid "User does not exist."
+msgstr ""
+
+#: .\mvc\views.py:93
+msgid "\"Username\" have not inputed."
+msgstr ""
+
+#: .\mvc\views.py:98
+msgid "\"Password\" have not inputed."
+msgstr ""
+
+#: .\mvc\views.py:103
+msgid "\"Real Name\" have not inputed."
+msgstr ""
+
+#: .\mvc\views.py:108
+msgid "\"Email\" have not inputed."
+msgstr ""
+
+#: .\mvc\views.py:114
+msgid "\"Username\" have existed."
+msgstr ""
+
+#: .\mvc\views.py:120
+msgid "\"Confirm Password\" have not match."
+msgstr ""
+
+#: .\mvc\views.py:133 .\mvc\views.py:472
+msgid "Successed."
+msgstr ""
+
+#: .\mvc\views.py:145
+msgid "Message"
+msgstr ""
+
+#: .\mvc\views.py:145
+msgid "Unknow error,processing interrupted."
+msgstr ""
+
+#: .\mvc\views.py:192 .\templates\base.html.py:23
+msgid "Home"
+msgstr ""
+
+#: .\mvc\views.py:297
+#, python-format
+msgid "%s's message %s"
+msgstr ""
+
+#: .\mvc\views.py:317
+msgid "Message deleted."
+msgstr ""
+
+#: .\mvc\views.py:319
+msgid "Delete failed."
+msgstr ""
+
+#: .\mvc\views.py:321
+#, python-format
+msgid "Message %s"
+msgstr ""
+
+#: .\mvc\views.py:343
+msgid "Login successed"
+msgstr ""
+
+#: .\mvc\views.py:343
+msgid "You are logied now."
+msgstr ""
+
+#: .\mvc\views.py:347
+msgid "Please login first."
+msgstr ""
+
+#: .\mvc\views.py:353 .\templates\base.html.py:26
+msgid "Signin"
+msgstr ""
+
+#: .\mvc\views.py:392 .\mvc\views.py:411 .\templates\base.html.py:27
+msgid "Signup"
+msgstr ""
+
+#: .\mvc\views.py:396
+msgid "Signup successed"
+msgstr ""
+
+#: .\mvc\views.py:396
+msgid "Your account was registed success."
+msgstr ""
+
+#: .\mvc\views.py:469
+msgid "Error"
+msgstr ""
+
+#: .\mvc\views.py:479
+msgid "Profile"
+msgstr ""
+
+#: .\mvc\views.py:497 .\templates\base.html.py:24
+msgid "Everyone"
+msgstr ""
+
+#: .\mvc\views.py:553 .\mvc\views.py:561 .\mvc\views.py:583
+msgid "Sorry"
+msgstr ""
+
+#: .\mvc\views.py:553 .\mvc\views.py:561 .\mvc\views.py:583
+msgid "This user dose not exist."
+msgstr ""
+
+#: .\mvc\views.py:559 .\mvc\views.py:589
+msgid "Successed"
+msgstr ""
+
+#: .\mvc\views.py:559
+#, python-format
+msgid "%s and you are friend now."
+msgstr ""
+
+#: .\mvc\views.py:591
+msgid "Undisposed"
+msgstr ""
+
+#: .\templates\404.html.py:9
+msgid "404 error.The page dons\"t exist."
+msgstr ""
+
+#: .\templates\500.html.py:9
+msgid "Unknow error,code:500."
+msgstr ""
+
+#: .\templates\base.html.py:29
+msgid "Me"
+msgstr ""
+
+#: .\templates\base.html.py:30
+msgid "Edit"
+msgstr ""
+
+#: .\templates\base.html.py:31
+msgid "Signout"
+msgstr ""
+
+#: .\templates\detail.html.py:25 .\templates\include\list_item.html.py:12
+msgid "ago"
+msgstr ""
+
+#: .\templates\detail.html.py:26 .\templates\include\list_item.html.py:13
+msgid "from"
+msgstr ""
+
+#: .\templates\detail.html.py:29 .\templates\include\list_item.html.py:16
+msgid "Delete"
+msgstr ""
+
+#: .\templates\index.html.py:10
+msgid " recent message"
+msgstr ""
+
+#: .\templates\index.html.py:12
+msgid "Recent message of eveyone"
+msgstr ""
+
+#: .\templates\index.html.py:39 .\templates\index.html.py:41
+msgid "Subscription"
+msgstr ""
+
+#: .\templates\index.html.py:49
+msgid "\"s friends"
+msgstr "'s friends"
+
+#: .\templates\result_message.html.py:10 .\templates\result_message.html.py:12
+msgid "Go back"
+msgstr ""
+
+#: .\templates\settings.html.py:14 .\templates\signup.html.py:17
+#: .\templates\include\userinfo.html.py:11
+msgid "Name"
+msgstr ""
+
+#: .\templates\settings.html.py:18 .\templates\signup.html.py:21
+msgid "Email"
+msgstr ""
+
+#: .\templates\settings.html.py:22 .\templates\include\userinfo.html.py:13
+msgid "Blog"
+msgstr ""
+
+#: .\templates\settings.html.py:26
+msgid "Face"
+msgstr ""
+
+#: .\templates\settings.html.py:27
+msgid "My face"
+msgstr ""
+
+#: .\templates\settings.html.py:34
+msgid "About me"
+msgstr ""
+
+#: .\templates\settings.html.py:39
+msgid "Save"
+msgstr ""
+
+#: .\templates\signin.html.py:13 .\templates\signup.html.py:13
+msgid "Username"
+msgstr ""
+
+#: .\templates\signin.html.py:17
+msgid "Passwrod"
+msgstr ""
+
+#: .\templates\signin.html.py:22
+msgid "Login"
+msgstr ""
+
+#: .\templates\signup.html.py:25
+msgid "Password"
+msgstr ""
+
+#: .\templates\signup.html.py:29
+msgid "Confirm"
+msgstr ""
+
+#: .\templates\signup.html.py:34
+msgid "Submit"
+msgstr ""
+
+#: .\templates\control\home_pagebar.html.py:8
+#: .\templates\control\home_pagebar.html.py:10
+#: .\templates\control\user_pagebar.html.py:8
+#: .\templates\control\user_pagebar.html.py:10
+#: .\templates\control\userslist_pagebar.html.py:8
+#: .\templates\control\userslist_pagebar.html.py:10
+msgid "First"
+msgstr ""
+
+#: .\templates\control\home_pagebar.html.py:15
+#: .\templates\control\home_pagebar.html.py:17
+#: .\templates\control\user_pagebar.html.py:15
+#: .\templates\control\user_pagebar.html.py:17
+#: .\templates\control\userslist_pagebar.html.py:15
+#: .\templates\control\userslist_pagebar.html.py:17
+msgid "Prev"
+msgstr ""
+
+#: .\templates\control\home_pagebar.html.py:23
+#: .\templates\control\home_pagebar.html.py:25
+#: .\templates\control\user_pagebar.html.py:23
+#: .\templates\control\user_pagebar.html.py:25
+#: .\templates\control\userslist_pagebar.html.py:23
+#: .\templates\control\userslist_pagebar.html.py:25
+msgid "Next"
+msgstr ""
+
+#: .\templates\control\home_pagebar.html.py:30
+#: .\templates\control\home_pagebar.html.py:32
+#: .\templates\control\user_pagebar.html.py:30
+#: .\templates\control\user_pagebar.html.py:32
+#: .\templates\control\userslist_pagebar.html.py:30
+#: .\templates\control\userslist_pagebar.html.py:32
+msgid "Last"
+msgstr ""
+
+#: .\templates\control\home_pagebar.html.py:35
+#: .\templates\control\user_pagebar.html.py:35
+#: .\templates\control\userslist_pagebar.html.py:35
+msgid "All of "
+msgstr ""
+
+#: .\templates\control\home_pagebar.html.py:35
+#: .\templates\control\user_pagebar.html.py:35
+msgid "messages"
+msgstr ""
+
+#: .\templates\control\userslist_pagebar.html.py:35
+msgid "users. "
+msgstr ""
+
+#: .\templates\include\list_item.html.py:9
+msgid "Detail"
+msgstr ""
+
+#: .\templates\include\postform.html.py:9
+msgid "What are you doing?"
+msgstr ""
+
+#: .\templates\include\postform.html.py:17
+msgid "Update"
+msgstr ""
+
+#: .\templates\include\userinfo.html.py:13
+msgid "Open as new window."
+msgstr ""
+
+#: .\templates\include\userinfo.html.py:16
+msgid "Remove friend"
+msgstr ""
+
+#: .\templates\include\userinfo.html.py:16
+msgid "Unfollow"
+msgstr ""
+
+#: .\templates\include\userinfo.html.py:18
+msgid "Follow"
+msgstr ""

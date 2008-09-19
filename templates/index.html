@@ -1,11 +1,15 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 {% load user_tags %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block head_link %}
 {% if user %}
-<link rel="alternate" type="application/rss+xml" title="{{ user.realname }}的最新消息" href="/user/feed/rss/recent/{{ user.username }}" />
+<link rel="alternate" type="application/rss+xml" title="{{ user.realname }} {% trans ' recent message' %}" href="/user/feed/rss/recent/{{ user.username }}" />
 {% else %}
-<link rel="alternate" type="application/rss+xml" title="所有人的最新消息" href="/feed/rss/recent/" />
+<link rel="alternate" type="application/rss+xml" title="{% trans 'Recent message of eveyone' %}" href="/feed/rss/recent/" />
 {% endif %}
 {% endblock %}
 {% block  main %}
@@ -32,9 +36,9 @@
         <div class="pagebar">
             {{ page_bar|safe }}
             {% if user %}
-                <a href="/user/feed/rss/recent/{{ user.username }}" alt="定阅">
+                <a href="/user/feed/rss/recent/{{ user.username }}" alt="{% trans 'Subscription' %}">
             {% else %}
-                 <a href="/feed/rss/recent/" alt="定阅">
+                 <a href="/feed/rss/recent/" alt="{% trans 'Subscription' %}">
             {% endif %}
            <img src="/images/feed.png" style="border:0;margin-bottom:-2px;" alt="feed icon" />
            </a>
@@ -42,7 +46,7 @@
     </div>                 
     {% if user %}
     <div class="friends">
-        <h3>{{user.realname}}的好友</h3>
+        <h3>{{user.realname}}{% trans '"s friends' %}</h3>
         <div class="list">
         {% for friend in friends %}
         <a href="{% url mvc.views.index_user friend.username %}" title="{{ friend.realname }}"><img src="{{ friend.face|face16 }}" alt="{{ friend.realname }}" class="face16" /></a>

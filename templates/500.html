@@ -1,7 +1,11 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 {% extends "base.html" %}
 {% block title %}Error 500{% endblock %}
 {% block main %}
 <div class="content">
-    程序异常，错误代码500。
+    {% trans 'Unknow error,code:500.' %}
 </div>
 {% endblock %}

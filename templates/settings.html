@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 {% load user_tags %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block main %}
@@ -7,32 +11,32 @@
     <form action="{% url tmitter.mvc.views.settings %}" method="post" enctype="multipart/form-data">
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <td class="field">姓名：</td>
+                <td class="field">{% trans 'Name' %}:</td>
                 <td><input type="text" name="realname" class="text" value="{{ user.realname }}" size="5" /></td>
             </tr>
             <tr>
-                <td class="field">Email：</td>
+                <td class="field">{% trans 'Email' %}:</td>
                 <td><input type="text" name="email" class="text"  value="{{ user.email }}" size="15" /></td>
             </tr>
             <tr>
-                <td class="field">主页：</td>
+                <td class="field">{% trans 'Blog' %}:</td>
                 <td><input type="text" name="url" class="text"  value="{{ user.url }}" size="22" /></td>
             </tr>
             <tr>
-                <td class="field">头像：</td>
-                <td><img src="{{ user.face|face }}" class="face100" alt="我的头像" /></td>
+                <td class="field">{% trans 'Face' %}:</td>
+                <td><img src="{{ user.face|face }}" class="face100" alt="{% trans 'My face' %}" /></td>
             </tr>
             <tr>
                 <td class="field"></td>
                 <td><input type="file" name="face" class="text" size="6" /></td>
             </tr>
             <tr>
-                <td class="field">关于我：</td>
+                <td class="field">{% trans 'About me' %}:</td>
                 <td><textarea name="about" class="text" cols="22" style="overflow:hidden;" rows="4">{{ user.about }}</textarea></td>
             </tr>
             <tr>
                 <td class="field"></td>
-                <td><button type="submit" class="submit">修改</button></td>
+                <td><button type="submit" class="submit">{% trans 'Save' %}</button></td>
             </tr>
         </table>
     </form>

@@ -1,3 +1,7 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 {% spaceless %}
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -16,22 +20,32 @@
     <div id="header">
         <h1><a href="/"><img src="/images/favicon.png" alt="Tmitter" />Tmitter</a></h1>
         <ul id="nav">
-            <li><a href="/">首页</a></li>
-            <li><a href="/users">网友们</a></li>
+            <li><a href="/">{% trans 'Home' %}</a></li>
+            <li><a href="/users">{% trans 'Everyone' %}</a></li>
             {% if not islogin %}            
-            <li><a href="/signin">登陆</a></li>
-            <li><a href="/signup">注册</a></li>
+            <li><a href="/signin">{% trans 'Signin' %}</a></li>
+            <li><a href="/signup">{% trans 'Signup' %}</a></li>
             {% else %} 
-            <li><a href="/user/{{ username }}">我的空间</a></li>
-            <li><a href="/settings">设置</a></li>
-            <li><a href="/signout">注销</a></li>
+            <li><a href="/user/{{ username }}">{% trans 'Me' %}</a></li>
+            <li><a href="/settings">{% trans 'Edit' %}</a></li>
+            <li><a href="/signout">{% trans 'Signout' %}</a></li>
             {% endif %}
         </ul>
     </div>
     <div id="main">
     {% block main %}{% endblock %}
     </div>
-    <div id="footer">Powered by <a href="http://www.thewolfs.com.cn">Thewolfs Lab</a>.</div>
+    <div id="footer">
+    	Powered by <a href="http://www.thewolfs.com.cn">Thewolfs Lab</a>.
+		<form action="/i18n/setlang/" method="post">
+			<select name="language">
+			{% for lang in LANGUAGES %}
+			<option value="{{ lang.0 }}">{{ lang.1 }}</option>
+			{% endfor %}
+			</select>
+			<input type="submit" value="Go" />
+		</form>
+	</div>
 </div>
 </body>
 </html>

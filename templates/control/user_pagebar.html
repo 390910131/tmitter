@@ -1,32 +1,36 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 {% spaceless %}
     <span class="first">
     {% ifequal page_index 1 %}
-        首页
+        {% trans 'First' %}
     {% else %}
-        <a href="{% url tmitter.mvc.views.index_user_page username,page_index %}">首页</a>
+        <a href="{% url tmitter.mvc.views.index_user_page username,page_index %}">{% trans 'First' %}</a>
     {% endifequal %}
     </span>
     <span class="prev">
     {% if has_prev %}
-        <a href="{% url tmitter.mvc.views.index_user_page username,page_prev %}">上一页</a>
+        <a href="{% url tmitter.mvc.views.index_user_page username,page_prev %}">{% trans 'Prev' %}</a>
     {% else %}
-        上一页
+        {% trans 'Prev' %}
     {% endif %}
     </span>
     <span class="page">{{ page_index }}/{{ page_count }}</span>
     <span class="next">
     {% if has_next %}
-        <a href="{% url tmitter.mvc.views.index_user_page username,page_next %}">下一页</a>
+        <a href="{% url tmitter.mvc.views.index_user_page username,page_next %}">{% trans 'Next' %}</a>
     {% else %}
-        下一页
+        {% trans 'Next' %}
     {% endif %}
     </span>
     <span class="last">
     {% ifequal page_index page_count %}
-        尾页
+        {% trans 'Last' %}
     {% else %}
-        <a href="{% url tmitter.mvc.views.index_user_page username,page_count %}">尾页</a>
+        <a href="{% url tmitter.mvc.views.index_user_page username,page_count %}">{% trans 'Last' %}</a>
     {% endifequal %}
     </span><br />
-    <span class="tip">共{{ row_count }}个消息</span>
+    <span class="tip">{% trans 'All of ' %} {{ row_count }} {% trans 'messages' %}</span>
 {% endspaceless %}

@@ -4,6 +4,7 @@ from django.template import Context, loader
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.core import serializers
+from django.utils.translation import ugettext as _
 from tmitter.settings import *
 from tmitter.mvc.models import Note,User,Category,Area
 from tmitter.mvc.feed import RSSRecentNotes,RSSUserRecentNotes
@@ -57,11 +58,11 @@ def __check_login(_username,_password):
         else:
             # password incorrect
             _state['success']  = False
-            _state['message'] = u"密码不正确."
+            _state['message'] = _('Password incorrect.')
     except (User.DoesNotExist):
         # user not exist
         _state['success'] = False
-        _state['message'] = '用户不存在.'
+        _state['message'] = _('User does not exist.')
         
                             
     return _state
@@ -89,34 +90,34 @@ def __do_signup(request,_userinfo):
     # check username exist
     if(_userinfo['username'] == ''):
         _state['success'] = False
-        _state['message'] = '用户名未输入.'
+        _state['message'] = _('"Username" have not inputed.')
         return _state
 
     if(_userinfo['password'] == ''):
         _state['success'] = False
-        _state['message'] = '密码未输入.'
+        _state['message'] = _('"Password" have not inputed.')
         return _state
 
     if(_userinfo['realname'] == ''):
         _state['success'] = False
-        _state['message'] = '姓名未输入.'
+        _state['message'] = _('"Real Name" have not inputed.')
         return _state
 
     if(_userinfo['email'] == ''):
         _state['success'] = False
-        _state['message'] = 'email未输入.'
+        _state['message'] = _('"Email" have not inputed.')
         return _state
     
     # check username exist
     if(__check_username_exist(_userinfo['username'])):
         _state['success'] = False
-        _state['message'] = '用户名已存在.'
+        _state['message'] = _('"Username" have existed.')
         return _state    
 
     # check password & confirm password
     if(_userinfo['password'] != _userinfo['confirm']):
         _state['success'] = False
-        _state['message'] = '确认密码不正确.'
+        _state['message'] = _('"Confirm Password" have not match.')
         return _state
 
     _user = User(
@@ -129,7 +130,7 @@ def __do_signup(request,_userinfo):
     #try:
     _user.save()
     _state['success'] = True
-    _state['message'] = '注册成功.'
+    _state['message'] = _('Successed.')
     #except:
         #_state['success'] = False
         #_state['message'] = '程序异常,注册失败.'
@@ -141,7 +142,7 @@ def __do_signup(request,_userinfo):
     
 
 # response result message page
-def __result_message(request,_title=u'消息',_message='程序异常，操作未成功。',_go_back_url=''):
+def __result_message(request,_title=_('Message'),_message=_('Unknow error,processing interrupted.'),_go_back_url=''):
     _islogin = __is_login(request)
         
     if _go_back_url == '':
@@ -188,7 +189,7 @@ def index_user_page(request,_username,_page_index):
     
     # get user login status
     _islogin = __is_login(request)
-    _page_title = u'首页'
+    _page_title = _('Home')
     
     try:
         # get post params
@@ -293,7 +294,7 @@ def detail(request,_id):
     _template = loader.get_template('detail.html')
     
     _context = Context({
-        'page_title' : u'%s的消息 %s' % (_note.user.realname,_id),
+        'page_title' : _('%s\'s message %s') % (_note.user.realname,_id),
         'item' :_note,
         'islogin' : _islogin,
         'userid' : __user_id(request),
@@ -313,11 +314,11 @@ def detail_delete(request,_id):
     
     try:
         _note.delete()
-        _message = u"消息已删除."
+        _message = _('Message deleted.')
     except:
-        _message = u"删除出错."
+        _message = _('Delete failed.')
     
-    return __result_message(request,u'消息 %s' % _id,_message) 
+    return __result_message(request,_('Message %s') % _id,_message) 
     
 
 # signin view
@@ -339,17 +340,17 @@ def signin(request):
         _state = __do_login(request,_username,_password)
 
         if _state['success']:
-            return __result_message(request,u'登录成功',u'恭喜，您已经登录成功。') 
+            return __result_message(request,_('Login successed'),_('You are logied now.')) 
     else:
         _state = {
             'success' : False,
-            'message' : '请登录'
+            'message' : _('Please login first.')
         }
 
     # body content
     _template = loader.get_template('signin.html')
     _context = Context({
-        'page_title' : u'登录',
+        'page_title' : _('Signin'),
         'state' : _state,
         })
     _output = _template.render(_context)
@@ -388,11 +389,11 @@ def signup(request):
     else:
         _state = {
             'success' : False,
-            'message' : '注册新用户'
+            'message' : _('Signup')
         }
     
     if(_state['success']):
-        return __result_message(request,u'注册成功',u'恭喜，您已经注册成功。') 
+        return __result_message(request,_('Signup successed'),_('Your account was registed success.')) 
 
     _result = {
             'success' : _state['success'],
@@ -407,7 +408,7 @@ def signup(request):
     # body content
     _template = loader.get_template('signup.html')
     _context = Context({
-        'page_title' : u'注册',
+        'page_title' : _('Signup'),
         'state' : _result,
         })
     _output = _template.render(_context)  
@@ -465,17 +466,17 @@ def settings(request):
             if _upload_state['success']:
                 _user.face = _upload_state['message']
             else:
-                return __result_message(request,u'错误',_upload_state['message'])
+                return __result_message(request,_('Error'),_upload_state['message'])
             
         _user.save(False)
-        _state['message'] = '保存成功'
+        _state['message'] = _('Successed.')
         # except:
             # return __result_message(request,u'错误','提交数据时出现异常，保存失败。')
     
     # body content
     _template = loader.get_template('settings.html')
     _context = Context({
-        'page_title' : u'个人设置',
+        'page_title' : _('Profile'),
         'state' : _state,
         'islogin' : _islogin,
         'user' : _user,
@@ -493,7 +494,7 @@ def users_list(request,_page_index=1):
     # check is login
     _islogin = __is_login(request)
 
-    _page_title = '网友们'
+    _page_title = _('Everyone')
     _users = User.objects.order_by('-addtime')
 
     _login_user = None
@@ -549,15 +550,15 @@ def friend_add(request,_username):
     try:
         _user = User.objects.get(id=_user_id)
     except:
-        return __result_message(request,u'对不起', u'你想添加这个人不存在。')
+        return __result_message(request,_('Sorry'), _('This user dose not exist.'))
            
     # check friend exist
     try:
         _friend = User.objects.get(username=_username)
         _user.friend.add(_friend)
-        return __result_message(request,u'成功', u'好友添加成功，%s 已成为了你的好友。' % _friend.realname)
+        return __result_message(request,_('Successed'), _('%s and you are friend now.') % _friend.realname)
     except:
-        return __result_message(request,u'错误', u'你想添加这个人不存在。')
+        return __result_message(request,_('Sorry'), _('This user dose not exist.'))
     
 def friend_remove(request,_username):
     """
@@ -579,15 +580,15 @@ def friend_remove(request,_username):
     try:
         _user = User.objects.get(id=_user_id)
     except:
-        return __result_message(request,u'对不起', u'你想添加这个人不存在。')
+        return __result_message(request,_('Sorry'), _('This user dose not exist.'))
            
     # check friend exist
     try:
         _friend = User.objects.get(username=_username)
         _user.friend.remove(_friend)
-        return __result_message(request,u'成功', u'与，%s 的好友关系已经解除。' % _friend.realname)
+        return __result_message(request,_('Successed'), u'Friend "%s" removed.' % _friend.realname)
     except:
-        return __result_message(request,u'错误', u'好友关系不存在。')
+        return __result_message(request,_('Undisposed'), u'He/She dose not your friend,undisposed.')
 
 def api_note_add(request):
     """

@@ -1,16 +1,20 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 <div id="post-message" class="form">
     <form method="post" action="/">                
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <td>我在做什么？</td>
-                <td class="word-count">可以输入 <span id="word-count">140</span> 个字</td>
+                <td>{% trans 'What are you doing?' %}</td>
+                <td class="word-count"></td>
             </tr>
         </table>
         <div class="input">
             <textarea name="message" class="text" rows="4"></textarea>
         </div>
         <div class="buttons">
-            <button type="submit" class="submit wide">发送</button>
+            <button type="submit" class="submit wide">{% trans 'Update' %}</button>
         </div>
     </form>
 </div>

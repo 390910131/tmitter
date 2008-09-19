@@ -1,4 +1,8 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 {% load user_tags %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block main %}
@@ -18,11 +22,11 @@
         <div class="right">
             <p class="message">{{ item.message|urlize }}</p>
             <div class="info">
-                <span class="date">{{ item.addtime|timesince }}前</span><br />
-                <span class="category">通过{{ item.category.name }}</span>
+                <span class="date">{{ item.addtime|timesince }} {% trans 'ago' %}</span><br />
+                <span class="category">{% trans 'from' %} {{ item.category.name }}</span>
                 {% if islogin %}
                 {% ifequal userid item.user.id %}
-                <span class="delete"><a href="{% url mvc.views.detail_delete item.id %}">删除</a></span>
+                <span class="delete"><a href="{% url mvc.views.detail_delete item.id %}">{% trans 'Delete' %}</a></span>
                 {% endifequal  %}
                 {% endif %}
             </div>

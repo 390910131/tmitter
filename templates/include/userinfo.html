@@ -1,17 +1,21 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 {% load user_tags %}
 {% load common_tags %}
 <div class="face">
     <a href="{% url tmitter.mvc.views.index_user user.username %}"><img src="{{ user.face|face }}" class="face75" /></a>
 </div>
 <ul class="right">
-    <li>姓名：{{ user.realname }}</li>
+    <li>{% trans 'Name' %}:{{ user.realname }}</li>
     <li>
-        <span><a href="{{ user.url }}" target="_blank" title="点击新窗口中打开地址">个人主页</a></span>
+        <span><a href="{{ user.url }}" target="_blank" title="{% trans 'Open as new window.' %}">{% trans 'Blog' %}</a></span>
 		{% if islogin %}
 			{% if user|in_list:login_user_friend_list %}
-	        <span><a href="{% url tmitter.mvc.views.friend_remove user.username %}" title="解除与{{ user.realname }}的好友关系">解除关系</a></span>
+	        <span><a href="{% url tmitter.mvc.views.friend_remove user.username %}" title="{% trans 'Remove friend' %} {{ user.realname }}">{% trans 'Unfollow' %}</a></span>
 			{% else %}
-			<span><a href="{% url tmitter.mvc.views.friend_add user.username %}" title="将{{ user.realname }}加为好友">加为好友</a></span>		
+			<span><a href="{% url tmitter.mvc.views.friend_add user.username %}" title="{{ user.realname }}">{% trans 'Follow' %}</a></span>		
 			{% endif %}
 		{% endif %}
     </li>

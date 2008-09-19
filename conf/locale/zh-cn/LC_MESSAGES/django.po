@@ -1,0 +1,346 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Tmitter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-09-20 00:02+0800\n"
+"PO-Revision-Date: 2008-09-20 01:28+0800\n"
+"Last-Translator: Jason Lee <huacnlee@gmail.com>\n"
+"Language-Team: Thewolfs Lab. <huacnlee@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: .\mvc\views.py:61
+msgid "Password incorrect."
+msgstr "密码不正确。"
+
+#: .\mvc\views.py:65
+msgid "User does not exist."
+msgstr "用户不存在。"
+
+#: .\mvc\views.py:93
+msgid "\"Username\" have not inputed."
+msgstr "“用户名”还未输入。"
+
+#: .\mvc\views.py:98
+msgid "\"Password\" have not inputed."
+msgstr "“密码”还未输入。"
+
+#: .\mvc\views.py:103
+msgid "\"Real Name\" have not inputed."
+msgstr "“姓名”还未输入。"
+
+#: .\mvc\views.py:108
+msgid "\"Email\" have not inputed."
+msgstr "“Email”还未输入。"
+
+#: .\mvc\views.py:114
+msgid "\"Username\" have existed."
+msgstr "此用户名已被他人注册。"
+
+#: .\mvc\views.py:120
+msgid "\"Confirm Password\" have not match."
+msgstr "“确认密码”不正确。"
+
+#: .\mvc\views.py:133
+#: .\mvc\views.py:472
+msgid "Successed."
+msgstr "成功。"
+
+#: .\mvc\views.py:145
+msgid "Message"
+msgstr "消息"
+
+#: .\mvc\views.py:145
+msgid "Unknow error,processing interrupted."
+msgstr "未知异常，操作已经自动中断。"
+
+#: .\mvc\views.py:192
+msgid "Home"
+msgstr "首页"
+
+#: .\mvc\views.py:297
+#, python-format
+msgid "%s's message %s"
+msgstr "%s 的消息 %s"
+
+#: .\mvc\views.py:317
+msgid "Message deleted."
+msgstr "消息已经删除。"
+
+#: .\mvc\views.py:319
+msgid "Delete failed."
+msgstr "删除失败。"
+
+#: .\mvc\views.py:321
+#, python-format
+msgid "Message %s"
+msgstr "消息 %s"
+
+#: .\mvc\views.py:343
+msgid "Login successed"
+msgstr "登陆成功"
+
+#: .\mvc\views.py:343
+msgid "You are logied now."
+msgstr "恭喜！你已经成功登陆。"
+
+#: .\mvc\views.py:347
+msgid "Please login first."
+msgstr "请先登陆。"
+
+#: .\mvc\views.py:353
+msgid "Signin"
+msgstr "登陆"
+
+#: .\mvc\views.py:392
+#: .\mvc\views.py:411
+msgid "Signup"
+msgstr "注册"
+
+#: .\mvc\views.py:396
+msgid "Signup successed"
+msgstr "注册成功"
+
+#: .\mvc\views.py:396
+msgid "Your account was registed success."
+msgstr "恭喜！您已经注册成功。"
+
+#: .\mvc\views.py:469
+msgid "Error"
+msgstr "错误"
+
+#: .\mvc\views.py:479
+msgid "Profile"
+msgstr "个人设置"
+
+#: .\mvc\views.py:497
+msgid "Everyone"
+msgstr "网友们"
+
+#: .\mvc\views.py:553
+#: .\mvc\views.py:561
+#: .\mvc\views.py:583
+msgid "Sorry"
+msgstr "对不起"
+
+#: .\mvc\views.py:553
+#: .\mvc\views.py:561
+#: .\mvc\views.py:583
+msgid "This user dose not exist."
+msgstr "此用户不存在。"
+
+#: .\mvc\views.py:559
+#: .\mvc\views.py:589
+msgid "Successed"
+msgstr "成功"
+
+#: .\mvc\views.py:559
+#, python-format
+msgid "%s and you are friend now."
+msgstr "%s 并不是您的好友。"
+
+#: .\mvc\views.py:591
+msgid "Undisposed"
+msgstr "未处理"
+
+#: .\templates\404.html.py:9
+msgid "404 error.The page dons\"t exist."
+msgstr "404错误，此页面不存在。"
+
+#: .\templates\500.html.py:9
+msgid "Unknow error,code:500."
+msgstr "未知错误，代码500"
+
+#: .\templates\base.html.py:29
+msgid "Me"
+msgstr "我的空间"
+
+#: .\templates\base.html.py:30
+msgid "Edit"
+msgstr "设置"
+
+#: .\templates\base.html.py:31
+msgid "Signout"
+msgstr "退出"
+
+#: .\templates\detail.html.py:25
+#: .\templates\include\list_item.html.py:12
+msgid "ago"
+msgstr "前"
+
+#: .\templates\detail.html.py:26
+#: .\templates\include\list_item.html.py:13
+msgid "from"
+msgstr "来自"
+
+#: .\templates\detail.html.py:29
+#: .\templates\include\list_item.html.py:16
+msgid "Delete"
+msgstr "删除"
+
+#: .\templates\index.html.py:10
+msgid " recent message"
+msgstr " 的最新消息"
+
+#: .\templates\index.html.py:12
+msgid "Recent message of eveyone"
+msgstr "所有人的消息更新"
+
+#: .\templates\index.html.py:39
+#: .\templates\index.html.py:41
+msgid "Subscription"
+msgstr "订阅"
+
+#: .\templates\index.html.py:49
+msgid "\"s friends"
+msgstr "'s friends"
+
+#: .\templates\result_message.html.py:10
+#: .\templates\result_message.html.py:12
+msgid "Go back"
+msgstr "返回"
+
+#: .\templates\settings.html.py:14
+#: .\templates\signup.html.py:17
+#: .\templates\include\userinfo.html.py:11
+msgid "Name"
+msgstr "姓名"
+
+#: .\templates\settings.html.py:18
+#: .\templates\signup.html.py:21
+msgid "Email"
+msgstr ""
+
+#: .\templates\settings.html.py:22
+#: .\templates\include\userinfo.html.py:13
+msgid "Blog"
+msgstr "个人主页"
+
+#: .\templates\settings.html.py:26
+msgid "Face"
+msgstr "头像"
+
+#: .\templates\settings.html.py:27
+msgid "My face"
+msgstr "我的头像"
+
+#: .\templates\settings.html.py:34
+msgid "About me"
+msgstr "关于我"
+
+#: .\templates\settings.html.py:39
+msgid "Save"
+msgstr "保存"
+
+#: .\templates\signin.html.py:13
+#: .\templates\signup.html.py:13
+msgid "Username"
+msgstr "用户名"
+
+#: .\templates\signin.html.py:17
+msgid "Passwrod"
+msgstr "密码"
+
+#: .\templates\signin.html.py:22
+msgid "Login"
+msgstr "登陆"
+
+#: .\templates\signup.html.py:25
+msgid "Password"
+msgstr "密码"
+
+#: .\templates\signup.html.py:29
+msgid "Confirm"
+msgstr "确认密码"
+
+#: .\templates\signup.html.py:34
+msgid "Submit"
+msgstr "提交"
+
+#: .\templates\control\home_pagebar.html.py:8
+#: .\templates\control\home_pagebar.html.py:10
+#: .\templates\control\user_pagebar.html.py:8
+#: .\templates\control\user_pagebar.html.py:10
+#: .\templates\control\userslist_pagebar.html.py:8
+#: .\templates\control\userslist_pagebar.html.py:10
+msgid "First"
+msgstr "首页"
+
+#: .\templates\control\home_pagebar.html.py:15
+#: .\templates\control\home_pagebar.html.py:17
+#: .\templates\control\user_pagebar.html.py:15
+#: .\templates\control\user_pagebar.html.py:17
+#: .\templates\control\userslist_pagebar.html.py:15
+#: .\templates\control\userslist_pagebar.html.py:17
+msgid "Prev"
+msgstr "上一页"
+
+#: .\templates\control\home_pagebar.html.py:23
+#: .\templates\control\home_pagebar.html.py:25
+#: .\templates\control\user_pagebar.html.py:23
+#: .\templates\control\user_pagebar.html.py:25
+#: .\templates\control\userslist_pagebar.html.py:23
+#: .\templates\control\userslist_pagebar.html.py:25
+msgid "Next"
+msgstr "下一页"
+
+#: .\templates\control\home_pagebar.html.py:30
+#: .\templates\control\home_pagebar.html.py:32
+#: .\templates\control\user_pagebar.html.py:30
+#: .\templates\control\user_pagebar.html.py:32
+#: .\templates\control\userslist_pagebar.html.py:30
+#: .\templates\control\userslist_pagebar.html.py:32
+msgid "Last"
+msgstr "尾页"
+
+#: .\templates\control\home_pagebar.html.py:35
+#: .\templates\control\user_pagebar.html.py:35
+#: .\templates\control\userslist_pagebar.html.py:35
+msgid "All of "
+msgstr "共"
+
+#: .\templates\control\home_pagebar.html.py:35
+#: .\templates\control\user_pagebar.html.py:35
+msgid "messages"
+msgstr "消息"
+
+#: .\templates\control\userslist_pagebar.html.py:35
+msgid "users. "
+msgstr "用户"
+
+#: .\templates\include\list_item.html.py:9
+msgid "Detail"
+msgstr "详细"
+
+#: .\templates\include\postform.html.py:9
+msgid "What are you doing?"
+msgstr "你在做什么？"
+
+#: .\templates\include\postform.html.py:17
+msgid "Update"
+msgstr "更新"
+
+#: .\templates\include\userinfo.html.py:13
+msgid "Open as new window."
+msgstr "新窗口打开"
+
+#: .\templates\include\userinfo.html.py:16
+msgid "Remove friend"
+msgstr "删除好友"
+
+#: .\templates\include\userinfo.html.py:16
+msgid "Unfollow"
+msgstr "解除好友"
+
+#: .\templates\include\userinfo.html.py:18
+msgid "Follow"
+msgstr "加为好友"
+
