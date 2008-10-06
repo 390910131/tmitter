@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # Django settings for note project.
+import os
+
+WEB_PATH = (os.path.dirname(os.path.abspath(__file__)))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -10,11 +13,11 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
-DATABASE_NAME = './db/tmitter.sqlite'             # Or path to database file if using sqlite3.
-DATABASE_USER = ''             # Not used with sqlite3.
-DATABASE_PASSWORD = ''         # Not used with sqlite3.
-DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
+DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'ado_mssql'.
+DATABASE_NAME = 'tmitter' #'%s/db/tmitter.sqlite' % WEB_PATH          # Or path to database file if using sqlite3.
+DATABASE_USER = 'monster'             # Not used with sqlite3.
+DATABASE_PASSWORD = '123123'         # Not used with sqlite3.
+DATABASE_HOST = '127.0.0.1'             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
 # Local time zone for this installation. Choices can be found here:
@@ -52,7 +55,7 @@ EMAIL_SUBJECT_PREFIX = '[Tmitter]'
 # Language code for this installation. All choices can be found here:
 # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
 # http://blogs.law.harvard.edu/tech/stories/storyReader$15
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'zh-cn'
 
 DEFAULT_CHARSET = "utf-8"
 
@@ -72,14 +75,14 @@ LANGUAGES = (
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT =  './statics/uploads/'
+MEDIA_ROOT =  '%s/statics/uploads/' % WEB_PATH 
 
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
-MEDIA_URL = '/uploads/'
+MEDIA_URL = '/statics/uploads/'
 
 # Default user face
-DEFAULT_FACE = '/images/face%d.png'
+DEFAULT_FACE = '/statics/images/face%d.png'
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
@@ -113,7 +116,7 @@ ROOT_URLCONF = 'tmitter.urls'
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
-    './templates',
+    '%s/templates' % WEB_PATH ,
     # Don't forget to use absolute paths, not relative paths.
 )
 

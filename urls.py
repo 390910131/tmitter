@@ -35,11 +35,8 @@ urlpatterns = patterns('',
     # Uncomment this for admin:
     (r'^admin/(.*)',admin.site.root),
     (r'^feed/rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_feeds}),
-    (r'^user/feed/rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_user_feeds}),
-    (r'^styles/(?P<path>.*)$', 'django.views.static.serve', {'document_root': './statics/styles'}),
-    (r'^scripts/(?P<path>.*)$', 'django.views.static.serve', {'document_root': './statics/scripts'}),
-    (r'^images/(?P<path>.*)$', 'django.views.static.serve', {'document_root': './statics/images'}),
-    (r'^uploads/(?P<path>.*)$', 'django.views.static.serve', {'document_root': './statics/uploads'}),
+    (r'^user/feed/rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed', {'feed_dict': rss_user_feeds}),	
+    (r'^statics/(?P<path>.*)$', 'django.views.static.serve', {'document_root': './statics'}),
     (r'^i18n/', include('django.conf.urls.i18n')),
 
 )

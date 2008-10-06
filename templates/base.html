@@ -11,14 +11,14 @@
 <title>Tmitter - {% block title %}{% endblock %}</title>
 <link rel="shortcut icon" href="/images/favicon.png" />
 {% block head_link %}{% endblock %}
-<link rel="stylesheet" type="text/css" href="/styles/default.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/statics/styles/default.css" media="all" />
 {% block styles %}{% endblock %}
 </head>
 <body>
 {% block scripts %}{% endblock %}
 <div id="container">
     <div id="header">
-        <h1><a href="/"><img src="/images/favicon.png" alt="Tmitter" />Tmitter</a></h1>
+        <h1><a href="/"><img src="/statics/images/favicon.png" alt="Tmitter" />Tmitter</a></h1>
         <ul id="nav">
             <li><a href="/">{% trans 'Home' %}</a></li>
             <li><a href="/users">{% trans 'Everyone' %}</a></li>
@@ -36,15 +36,7 @@
     {% block main %}{% endblock %}
     </div>
     <div id="footer">
-    	Powered by <a href="http://www.thewolfs.com.cn">Thewolfs Lab</a>.
-		<form action="/i18n/setlang/" method="post">
-			<select name="language">
-			{% for lang in LANGUAGES %}
-			<option value="{{ lang.0 }}">{{ lang.1 }}</option>
-			{% endfor %}
-			</select>
-			<input type="submit" value="Go" />
-		</form>
+    	Powered by <a href="http://www.thewolfs.com.cn">Thewolfs Lab</a>.		
 	</div>
 </div>
 </body>
